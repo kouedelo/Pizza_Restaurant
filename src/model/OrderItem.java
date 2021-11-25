@@ -1,27 +1,27 @@
 package model;
 
 public class OrderItem {
-    private String orderId;
+    private String itemId;
 
     public OrderItem() {
     }
 
-    public OrderItem(String orderId) {
-        this.orderId = orderId;
+    public OrderItem(String itemId) {
+        this.itemId = itemId;
     }
 
-    public String getOrderId() {
-        return orderId;
+    public String getItemId() {
+        return itemId;
     }
 
-    public void setOrderId(String orderId) {
-        this.orderId = orderId;
+    public void setItemId(String itemId) {
+        this.itemId = itemId;
     }
 
     @Override
     public String toString() {
         return "OrderItem{" +
-                "orderId='" + orderId + '\'' +
+                "itemId='" + itemId + '\'' +
                 '}';
     }
 }
