@@ -2,13 +2,14 @@ package dao;
 
 // Import log4j classes for logging purposes.
 
+import model.Customer;
+import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DatabaseHandler {
 
@@ -25,6 +26,9 @@ public class DatabaseHandler {
     private static final String password = "";
     private static Connection conn = null;
     private static Statement stmt = null;
+
+    // List of all customers
+    private static List<Customer> customerList = new ArrayList<>();
 
     // No-arg constructor
     private DatabaseHandler() {
@@ -74,5 +78,101 @@ public class DatabaseHandler {
             handler = new DatabaseHandler();
         }
         return handler;
+    }
+
+    // Method for returning the current connection
+    public Connection getConnection() {
+        return conn;
+    }
+
+    // Method for getting all customers from the database
+    public void getPreferences() {
+
+        customerList.clear();
+        String qu = "SELECT * FROM customer";
+        ResultSet rs = execQuery(qu);
+        try {
+            while (rs.next()) {
+                String phoneNumber = rs.getString("phone_number");
+                String password = rs.getString("password");
+                String email = rs.getString("email");
+                String firstName = rs.getString("first_name");
+                String lastName = rs.getString("last_name");
+                String city = rs.getString("city");
+                String state = rs.getString("state");
+                String zipCode = rs.getString("zip_code");
+                customerList.add(new Customer(phoneNumber, password, email, firstName, lastName, city, state, zipCode));
+
+            }
+        } catch (SQLException ex) {
+            java.util.logging.Logger.getLogger(DatabaseHandler.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+    }
+
+    // Method for executing queries
+    public ResultSet execQuery(String query) {
+        ResultSet result;
+        try {
+            //conn = DriverManager.getConnection(DB_URL, username, password);
+            stmt = conn.createStatement();
+            result = stmt.executeQuery(query);
+        } catch (SQLException ex) {
+            System.out.println("Exception at execQuery:dataHandler" + ex.getLocalizedMessage());
+            return null;
+        } finally {
+        }
+        return result;
+    }
+
+    // Method for getting the current user after logging in
+    public Customer returnUser(String phoneNumber, String password) {
+        Customer currentUser = null;
+        for (Customer customer : customerList) {
+            if (phoneNumber.equals(customer.getPhoneNumber()) && password.equals(customer.getPassword())) {
+                currentUser = customer;
+            }
+        }
+        return currentUser;
+    }
+
+    // Method for updating customer data
+    public boolean updateCustomer(Customer customer) {
+        try {
+
+            String update = "UPDATE customer SET phone_number=?, password=?, email=?,first_name=?,last_name=?,city=?,state=?,zip_code=? WHERE phone_number=? AND password=?";
+            PreparedStatement stmt = conn.prepareStatement(update);
+            stmt.setString(1, customer.getPhoneNumber());
+            stmt.setString(2, customer.getPassword());
+            stmt.setString(3, customer.getEmail());
+            stmt.setString(4, customer.getFirstName());
+            stmt.setString(5, customer.getLastName());
+            stmt.setString(6, customer.getCity());
+            stmt.setString(7, customer.getState());
+            stmt.setString(8, customer.getZipCode());
+            stmt.setString(9, customer.getPhoneNumber());
+            stmt.setString(10, customer.getPassword());
+            int res = stmt.executeUpdate();
+            return (res > 0);
+        } catch (SQLException ex) {
+            LOGGER.log(Level.ERROR, "{}", ex);
+        }
+        return false;
+    }
+
+    // Method for deleting a customer
+    public boolean deleteCustomer(Customer customer) {
+        try {
+            String deleteStatement = "DELETE FROM customer WHERE phone_number=? AND password=?";
+            PreparedStatement stmt = conn.prepareStatement(deleteStatement);
+            stmt.setString(1, customer.getPhoneNumber());
+            stmt.setString(2, customer.getPassword());
+            int res = stmt.executeUpdate();
+            if (res == 1) {
+                return true;
+            }
+        } catch (SQLException ex) {
+            LOGGER.log(Level.ERROR, "{}", ex);
+        }
+        return false;
     }
 }
