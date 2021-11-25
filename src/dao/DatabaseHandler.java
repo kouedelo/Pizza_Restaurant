@@ -52,7 +52,7 @@ public class DatabaseHandler {
 
         // Connect to database using username and password
         try {
-            conn = DriverManager.getConnection(DB_URL, "username", "password");
+            conn = DriverManager.getConnection(DB_URL, "root", "sep@2398");
             stmt = conn.createStatement();
         } catch (SQLException e) {
             System.out.println("Connection Failed! Check output console");
