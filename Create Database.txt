@@ -53,7 +53,7 @@ cvc                            varchar(20)           NOT NULL,
 card_number                    varchar(20)           NOT NULL,
 zip_code                       varchar(20)           NOT NULL,
 Name_on_card                   varchar(20)           NOT NULL,
-exp_date                       Date                  NOT NULL,
+exp_date                       varchar(20)           NOT NULL,
 
 CONSTRAINT CARD_PK
        PRIMARY KEY(payment_id)
@@ -180,7 +180,7 @@ CONSTRAINT BELONGS_TO_ORDER_FK
 CREATE TABLE PAYMENT_METHOD(
 item_id                            varchar(20)           NOT NULL,
 order_id                           varchar(20)           NOT NULL,
-date                               Date                  NOT NULL,
+date                               varchar(20)           NOT NULL,
 
 CONSTRAINT PAYMENT_METHOD_PK
        PRIMARY KEY(item_id,order_id),
