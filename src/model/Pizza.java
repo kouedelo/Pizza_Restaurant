@@ -1,27 +1,27 @@
 package model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Pizza extends OrderItem {
     private String size;
     private String crust;
-    private int quantity;
-    private double price;
+    private List<PizzaTopping> toppings = new ArrayList<>();
 
     public Pizza() {
     }
 
-    public Pizza(String size, String crust, int quantity, double price) {
+    public Pizza(String size, String crust, List<PizzaTopping> toppings) {
         this.size = size;
         this.crust = crust;
-        this.quantity = quantity;
-        this.price = price;
+        this.toppings = toppings;
     }
 
-    public Pizza(String itemId, String size, String crust, int quantity, double price) {
-        super(itemId);
+    public Pizza(String itemId, int quantity, double price, String size, String crust, List<PizzaTopping> toppings) {
+        super(itemId, quantity, price);
         this.size = size;
         this.crust = crust;
-        this.quantity = quantity;
-        this.price = price;
+        this.toppings = toppings;
     }
 
     public String getSize() {
@@ -40,20 +40,21 @@ public class Pizza extends OrderItem {
         this.crust = crust;
     }
 
-    public int getQuantity() {
-        return quantity;
+    public List<PizzaTopping> getToppings() {
+        return toppings;
     }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
+    public void setToppings(List<PizzaTopping> toppings) {
+        this.toppings = toppings;
     }
 
-    public double getPrice() {
-        return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
+    public String getToppingsNames() {
+        String names = "";
+        for (PizzaTopping topping :
+                this.toppings) {
+            names += topping.getToppingName() + ", ";
+        }
+        return names;
     }
 
     @Override
@@ -61,8 +62,7 @@ public class Pizza extends OrderItem {
         return "Pizza{" +
                 "size='" + size + '\'' +
                 ", crust='" + crust + '\'' +
-                ", quantity=" + quantity +
-                ", price=" + price +
+                ", toppings=" + toppings +
                 '}';
     }
 }

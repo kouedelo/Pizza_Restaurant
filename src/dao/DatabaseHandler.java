@@ -3,6 +3,7 @@ package dao;
 // Import log4j classes for logging purposes.
 
 import model.Customer;
+import model.OrderItem;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -22,13 +23,16 @@ public class DatabaseHandler {
 
     // Mysql Database URL
     private static final String DB_URL = "jdbc:mysql://localhost:3306/pizza_restaurant?zeroDateTimeBehavior=CONVERT_TO_NULL&serverTimezone=UTC&useSSL=false";
-    private static final String username = "";
-    private static final String password = "";
+    private static final String username = "root";
+    private static final String password = "sep@2398";
     private static Connection conn = null;
     private static Statement stmt = null;
 
     // List of all customers
-    private static List<Customer> customerList = new ArrayList<>();
+    public static List<Customer> customerList = new ArrayList<>();
+
+    // List of ordered items
+    public static List<OrderItem> orderItemList = new ArrayList<>();
 
     // No-arg constructor
     private DatabaseHandler() {
