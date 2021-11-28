@@ -42,7 +42,7 @@ public class CartPageController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         initCol();
         orderTable.setItems(FXCollections.observableArrayList(DatabaseHandler.orderItemList));
-        priceText.setText(calculateSubtotal());
+        priceText.setText("$ " + calculateSubtotal());
     }
 
     private void initCol() {
@@ -55,11 +55,11 @@ public class CartPageController implements Initializable {
     }
 
     private String calculateSubtotal() {
-        double totalPrice = 0;
+        double totalPrice = 0.0;
         for (OrderItem order : DatabaseHandler.orderItemList
         ) {
             totalPrice += order.getPrice();
         }
-        return String.valueOf(totalPrice);
+        return "" + (float) totalPrice;
     }
 }

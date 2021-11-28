@@ -2,8 +2,7 @@ package dao;
 
 // Import log4j classes for logging purposes.
 
-import model.Customer;
-import model.OrderItem;
+import model.*;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -42,6 +41,7 @@ public class DatabaseHandler {
     automatically connecting to the database*/
     static {
         createConnection();
+        //populateOrders();
         //inflateDB();
     }
 
@@ -178,5 +178,15 @@ public class DatabaseHandler {
             LOGGER.log(Level.ERROR, "{}", ex);
         }
         return false;
+    }
+
+    private static void populateOrders(){
+        Pizza pizza1 = new Pizza("2244", 2,  18.7,  "medium",  "handmade");
+        pizza1.getToppings().add(new PizzaTopping("2244",  "tomatoes",  2.99));
+        pizza1.getToppings().add(new PizzaTopping("2244",  "cheese",  2.99));
+
+        orderItemList.add(pizza1);
+        orderItemList.add(new Beverage( "667",  9,  3.9,  "coca cola"));
+        orderItemList.add(new Sides( "667",  9,  3.9,  "bread"));
     }
 }

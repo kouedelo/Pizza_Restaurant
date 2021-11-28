@@ -24,6 +24,12 @@ public class Pizza extends OrderItem {
         this.toppings = toppings;
     }
 
+    public Pizza(String itemId, int quantity, double price, String size, String crust) {
+        super(itemId, quantity, price);
+        this.size = size;
+        this.crust = crust;
+    }
+
     public String getSize() {
         return size;
     }
