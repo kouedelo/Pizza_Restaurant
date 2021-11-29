@@ -93,6 +93,25 @@ public class orderPageController implements Initializable {
         }
     }
 
+
+    @FXML
+    private void handleBackButton(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/homePage.fxml"));
+            Parent parent = loader.load();
+            HomePageController controller = loader.getController();
+            controller.currentCustomer = currentCustomer;
+            Stage stage = new Stage(StageStyle.DECORATED);
+            stage.setTitle("Pizza App");
+            stage.setScene(new Scene(parent));
+            ((Stage) mainPane.getScene().getWindow()).close();
+            stage.show();
+            //LibraryAssistantUtil.setStageIcon(stage);
+        } catch (IOException ex) {
+            LOGGER.log(Level.ERROR, "{}", ex);
+        }
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
