@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.PizzaPageController">
+<AnchorPane fx:id="pizzaPane" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.PizzaPageController">
    <children>
       <Pane prefHeight="486.0" prefWidth="894.0" style="-fx-background-color: BLACK;">
          <children>

@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -27,40 +28,69 @@ public class orderPageController implements Initializable {
     public static Customer currentCustomer;
 
     @FXML
-    private Pane MainPane;
+    private AnchorPane mainPane;
 
     @FXML
     private void handlePizzaButton(ActionEvent event) {
-        /*try {
+        try {
 
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/orderPage.fxml"));
-            Parent parent = loader.load();
-            orderPageController controller = loader.getController();
-            controller.currentCustomer = currentCustomer;
-            Stage stage = new Stage(StageStyle.DECORATED);
-            stage.setTitle("Pizza App");
-            stage.setScene(new Scene(parent));
-            ((Stage) login.getScene().getWindow()).close();
-            stage.show();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/pizzaPage.fxml"));
+            loader.load();
+            PizzaPageController controller = loader.getController();
+            mainPane.getChildren().clear();
+            mainPane.getChildren().add(controller.getPizzaPane());
             //LibraryAssistantUtil.setStageIcon(stage);
         } catch (IOException ex) {
             LOGGER.log(Level.ERROR, "{}", ex);
-        }*/
+        }
     }
 
     @FXML
     private void handleBeverageButton(ActionEvent event) {
 
+        try {
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/beveragePage.fxml"));
+            loader.load();
+            BeveragePageController controller = loader.getController();
+            mainPane.getChildren().clear();
+            mainPane.getChildren().add(controller.getBeveragePane());
+            //LibraryAssistantUtil.setStageIcon(stage);
+        } catch (IOException ex) {
+            LOGGER.log(Level.ERROR, "{}", ex);
+        }
     }
 
     @FXML
     private void handleSidesButton(ActionEvent event) {
 
+        try {
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/sidePage.fxml"));
+            loader.load();
+            sidePageController controller = loader.getController();
+            mainPane.getChildren().clear();
+            mainPane.getChildren().add(controller.getSidesPane());
+            //LibraryAssistantUtil.setStageIcon(stage);
+        } catch (IOException ex) {
+            LOGGER.log(Level.ERROR, "{}", ex);
+        }
     }
 
     @FXML
     private void handleCartButton(ActionEvent event) {
 
+        try {
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/cartPage.fxml"));
+            loader.load();
+            CartPageController controller = loader.getController();
+            mainPane.getChildren().clear();
+            mainPane.getChildren().add(controller.getCartPane());
+            //LibraryAssistantUtil.setStageIcon(stage);
+        } catch (IOException ex) {
+            LOGGER.log(Level.ERROR, "{}", ex);
+        }
     }
 
     @Override

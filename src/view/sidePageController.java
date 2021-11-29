@@ -47,6 +47,10 @@ public class sidePageController implements Initializable {
 
     private double chocolateCookiePrice = 4.0;
 
+    public AnchorPane getSidesPane() {
+        return SidesPane;
+    }
+
     @FXML
     private void handleAddToCartButton(ActionEvent event) {
 
