@@ -16,7 +16,7 @@ public class PizzaRestaurantMain extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("orderPage.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("homePage.fxml"));
 
         Scene scene = new Scene(root);
 
