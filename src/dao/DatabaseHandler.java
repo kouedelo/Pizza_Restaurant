@@ -25,7 +25,7 @@ public class DatabaseHandler {
     // Mysql Database URL
     private static final String DB_URL = "jdbc:mysql://localhost:3306/pizza_restaurant?zeroDateTimeBehavior=CONVERT_TO_NULL&serverTimezone=UTC&useSSL=false";
     private static final String username = "root";
-    private static final String password = "!Fo06052002!";
+    private static final String password = "sep@2398";
     private static Connection conn = null;
     private static Statement stmt = null;
 
