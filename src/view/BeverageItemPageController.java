@@ -8,6 +8,7 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import model.Beverage;
 import model.Sides;
 
@@ -55,6 +56,8 @@ public class BeverageItemPageController implements Initializable {
             if (largeRadioBtn.isSelected()) {
                 DatabaseHandler.orderItemList.add(new Beverage(UUID.randomUUID().toString(), quantity, 1.0, nameText.getText(), "Large"));
             }
+
+            ((Stage) largeRadioBtn.getScene().getWindow()).close();
         } catch (Exception ex) {
 
         }

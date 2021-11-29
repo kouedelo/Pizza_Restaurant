@@ -11,7 +11,7 @@
    <children>
       <TableView fx:id="orderTable" layoutX="16.0" layoutY="43.0" prefHeight="332.0" prefWidth="863.0">
         <columns>
-          <TableColumn fx:id="pizzaSizeColumn" prefWidth="97.0" text="Pizza Size" />
+          <TableColumn fx:id="pizzaSizeColumn" prefWidth="97.0" text="Size" />
           <TableColumn fx:id="pizzaCrustColumn" prefWidth="111.0" text="Pizza Crust" />
             <TableColumn fx:id="pizzaToppingsColumn" prefWidth="218.0" text="Pizza Toppings" />
             <TableColumn fx:id="nameColumn" minWidth="9.0" prefWidth="182.0" text="Name" />
