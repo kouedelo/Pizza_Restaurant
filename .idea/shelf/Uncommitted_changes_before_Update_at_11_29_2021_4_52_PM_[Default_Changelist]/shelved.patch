@@ -1,0 +1,626 @@
+Index: src/view/sidePage.fxml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n\r\n<?import javafx.scene.control.Button?>\r\n<?import javafx.scene.control.RadioButton?>\r\n<?import javafx.scene.control.TextField?>\r\n<?import javafx.scene.layout.AnchorPane?>\r\n<?import javafx.scene.text.Font?>\r\n<?import javafx.scene.text.Text?>\r\n\r\n<AnchorPane fx:id=\"SidesPane\" prefHeight=\"447.0\" prefWidth=\"600.0\" xmlns=\"http://javafx.com/javafx/8.0.141\" xmlns:fx=\"http://javafx.com/fxml/1\" fx:controller=\"view.SidePage\">\r\n   <children>\r\n      <Text layoutX=\"156.0\" layoutY=\"84.0\" strokeType=\"OUTSIDE\" strokeWidth=\"0.0\" text=\"Bread sticks ($4)\" />\r\n      <Text layoutX=\"141.0\" layoutY=\"177.0\" strokeType=\"OUTSIDE\" strokeWidth=\"0.0\" text=\"Bread stick bites ($2)\" />\r\n      <Text layoutX=\"123.0\" layoutY=\"284.0\" strokeType=\"OUTSIDE\" strokeWidth=\"0.0\" text=\"Big chocolate chip cookie ($4)\" />\r\n      <RadioButton fx:id=\"breadStickRadioBtn\" layoutX=\"184.0\" layoutY=\"106.0\" mnemonicParsing=\"false\" />\r\n      <RadioButton fx:id=\"breadStickBitesRadioBtn\" layoutX=\"184.0\" layoutY=\"200.0\" mnemonicParsing=\"false\" />\r\n      <RadioButton fx:id=\"chocolateCookieRadioBtn\" layoutX=\"182.0\" layoutY=\"310.0\" mnemonicParsing=\"false\" />\r\n      <TextField fx:id=\"breadStickTxtField\" layoutX=\"376.0\" layoutY=\"101.0\" prefHeight=\"31.0\" prefWidth=\"78.0\" />\r\n      <Text layoutX=\"288.0\" layoutY=\"122.0\" strokeType=\"OUTSIDE\" strokeWidth=\"0.0\" text=\"Quantity:\" />\r\n      <Text layoutX=\"288.0\" layoutY=\"216.0\" strokeType=\"OUTSIDE\" strokeWidth=\"0.0\" text=\"Quantity:\" />\r\n      <Text layoutX=\"288.0\" layoutY=\"326.0\" strokeType=\"OUTSIDE\" strokeWidth=\"0.0\" text=\"Quantity:\" />\r\n      <TextField fx:id=\"breadStickBitesTxtField\" layoutX=\"376.0\" layoutY=\"195.0\" prefHeight=\"31.0\" prefWidth=\"78.0\" />\r\n      <TextField fx:id=\"chocolateCookieTxtField\" layoutX=\"376.0\" layoutY=\"305.0\" prefHeight=\"31.0\" prefWidth=\"78.0\" />\r\n      <Button layoutX=\"409.0\" layoutY=\"384.0\" mnemonicParsing=\"false\" style=\"-fx-background-color: red;\" text=\"Add to cart\" textFill=\"WHITE\">\r\n         <font>\r\n            <Font name=\"Arial Black\" size=\"15.0\" />\r\n         </font>\r\n      </Button>\r\n   </children>\r\n</AnchorPane>\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/view/sidePage.fxml	(revision 82652d1ff2bac00f992a9a1da02ee1f8a9ec1e31)
++++ src/view/sidePage.fxml	(date 1638221684060)
+@@ -7,7 +7,7 @@
+ <?import javafx.scene.text.Font?>
+ <?import javafx.scene.text.Text?>
+ 
+-<AnchorPane fx:id="SidesPane" prefHeight="447.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.SidePage">
++<AnchorPane fx:id="SidesPane" prefHeight="447.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.sidePageController">
+    <children>
+       <Text layoutX="156.0" layoutY="84.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bread sticks ($4)" />
+       <Text layoutX="141.0" layoutY="177.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bread stick bites ($2)" />
+@@ -21,10 +21,10 @@
+       <Text layoutX="288.0" layoutY="326.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Quantity:" />
+       <TextField fx:id="breadStickBitesTxtField" layoutX="376.0" layoutY="195.0" prefHeight="31.0" prefWidth="78.0" />
+       <TextField fx:id="chocolateCookieTxtField" layoutX="376.0" layoutY="305.0" prefHeight="31.0" prefWidth="78.0" />
+-      <Button layoutX="409.0" layoutY="384.0" mnemonicParsing="false" style="-fx-background-color: red;" text="Add to cart" textFill="WHITE">
++      <Button layoutX="409.0" layoutY="384.0" mnemonicParsing="false" onAction="#handleAddToCartButton" style="-fx-background-color: red;" text="Add to cart" textFill="WHITE">
+          <font>
+             <Font name="Arial Black" size="15.0" />
+          </font>
+       </Button>
+    </children>
+-</AnchorPane>
++</AnchorPane>
+\ No newline at end of file
+Index: src/view/sidePageController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package view;\r\n\r\nimport dao.DatabaseHandler;\r\nimport javafx.event.ActionEvent;\r\nimport javafx.fxml.FXML;\r\nimport javafx.fxml.Initializable;\r\nimport javafx.scene.control.RadioButton;\r\nimport javafx.scene.control.TextField;\r\nimport javafx.scene.layout.AnchorPane;\r\nimport model.Sides;\r\n\r\nimport java.net.URL;\r\nimport java.util.ResourceBundle;\r\nimport java.util.UUID;\r\n\r\npublic class sidePageController implements Initializable {\r\n    @FXML\r\n    private AnchorPane SidesPane;\r\n\r\n    @FXML\r\n    private RadioButton breadStickRadioBtn;\r\n\r\n    @FXML\r\n    private RadioButton breadStickBitesRadioBtn;\r\n\r\n    @FXML\r\n    private RadioButton chocolateCookieRadioBtn;\r\n\r\n    @FXML\r\n    private TextField breadStickTxtField;\r\n\r\n    @FXML\r\n    private TextField breadStickBitesTxtField;\r\n\r\n    @FXML\r\n    private TextField chocolateCookieTxtField;\r\n\r\n    private String breadSticksName = \"Bread sticks\";\r\n\r\n    private String breadSticksBitesName = \"Bread stick bites\";\r\n\r\n    private String chocolateCookieName = \"Big chocolate chip cookie\";\r\n\r\n    private double breadSticksPrice = 4.0;\r\n\r\n    private double breadSticksBitesPrice = 2.0;\r\n\r\n    private double chocolateCookiePrice = 4.0;\r\n\r\n    @FXML\r\n    private void handleAddToCartButton(ActionEvent event) {\r\n\r\n        try {\r\n            if (breadStickRadioBtn.isSelected()) {\r\n                if (breadStickTxtField.getText().isEmpty()) {\r\n                    DatabaseHandler.orderItemList.add(new Sides(UUID.randomUUID().toString(), 1, breadSticksPrice, breadSticksName));\r\n                } else {\r\n                    int quantity = Integer.parseInt(breadStickTxtField.getText());\r\n                    DatabaseHandler.orderItemList.add(new Sides(UUID.randomUUID().toString(), quantity, breadSticksPrice, breadSticksName));\r\n                }\r\n            }\r\n\r\n            if (breadStickBitesRadioBtn.isSelected()) {\r\n                if (breadStickBitesTxtField.getText().isEmpty()) {\r\n                    DatabaseHandler.orderItemList.add(new Sides(UUID.randomUUID().toString(), 1, breadSticksBitesPrice, breadSticksBitesName));\r\n\r\n                } else {\r\n                    int quantity = Integer.parseInt(breadStickBitesTxtField.getText());\r\n                    DatabaseHandler.orderItemList.add(new Sides(UUID.randomUUID().toString(), quantity, breadSticksBitesPrice, breadSticksBitesName));\r\n                }\r\n            }\r\n\r\n            if (chocolateCookieRadioBtn.isSelected()) {\r\n                if (chocolateCookieTxtField.getText().isEmpty()) {\r\n                    DatabaseHandler.orderItemList.add(new Sides(UUID.randomUUID().toString(), 1, chocolateCookiePrice, chocolateCookieName));\r\n                } else {\r\n                    int quantity = Integer.parseInt(chocolateCookieTxtField.getText());\r\n                    DatabaseHandler.orderItemList.add(new Sides(UUID.randomUUID().toString(), quantity, chocolateCookiePrice, chocolateCookieName));\r\n                }\r\n            }\r\n        } catch (Exception ex) {\r\n\r\n        }\r\n    }\r\n\r\n    @Override\r\n    public void initialize(URL location, ResourceBundle resources) {\r\n\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/view/sidePageController.java	(revision 82652d1ff2bac00f992a9a1da02ee1f8a9ec1e31)
++++ src/view/sidePageController.java	(date 1638221706568)
+@@ -47,6 +47,10 @@
+ 
+     private double chocolateCookiePrice = 4.0;
+ 
++    public AnchorPane getSidesPane() {
++        return SidesPane;
++    }
++
+     @FXML
+     private void handleAddToCartButton(ActionEvent event) {
+ 
+@@ -87,4 +91,4 @@
+     public void initialize(URL location, ResourceBundle resources) {
+ 
+     }
+-}
++}
+\ No newline at end of file
+Index: src/view/beveragePage.fxml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n\r\n<?import javafx.scene.control.Button?>\r\n<?import javafx.scene.layout.AnchorPane?>\r\n<?import javafx.scene.text.Font?>\r\n<?import javafx.scene.text.Text?>\r\n\r\n<AnchorPane prefHeight=\"400.0\" prefWidth=\"600.0\" xmlns=\"http://javafx.com/javafx/8.0.141\" xmlns:fx=\"http://javafx.com/fxml/1\" fx:controller=\"view.BeveragePageController\">\r\n   <children>\r\n      <Button layoutX=\"90.0\" layoutY=\"133.0\" mnemonicParsing=\"false\" onAction=\"#handlePepsiButton\" style=\"-fx-background-color: red;\" text=\"Order\" textFill=\"WHITE\">\r\n         <font>\r\n            <Font name=\"Arial Black\" size=\"15.0\" />\r\n         </font>\r\n      </Button>\r\n      <Button layoutX=\"268.0\" layoutY=\"133.0\" mnemonicParsing=\"false\" onAction=\"#handleDietPepsiButton\" style=\"-fx-background-color: red;\" text=\"Order\" textFill=\"WHITE\">\r\n         <font>\r\n            <Font name=\"Arial Black\" size=\"15.0\" />\r\n         </font>\r\n      </Button>\r\n      <Button layoutX=\"409.0\" layoutY=\"133.0\" mnemonicParsing=\"false\" onAction=\"#handleOrangeButton\" style=\"-fx-background-color: red;\" text=\"Order\" textFill=\"WHITE\">\r\n         <font>\r\n            <Font name=\"Arial Black\" size=\"15.0\" />\r\n         </font>\r\n      </Button>\r\n      <Button layoutX=\"155.0\" layoutY=\"297.0\" mnemonicParsing=\"false\" onAction=\"#handleDietOrangeButton\" style=\"-fx-background-color: red;\" text=\"Order\" textFill=\"WHITE\">\r\n         <font>\r\n            <Font name=\"Arial Black\" size=\"15.0\" />\r\n         </font>\r\n      </Button>\r\n      <Button layoutX=\"344.0\" layoutY=\"297.0\" mnemonicParsing=\"false\" onAction=\"#handleLemonadeButton\" style=\"-fx-background-color: red;\" text=\"Order\" textFill=\"WHITE\">\r\n         <font>\r\n            <Font name=\"Arial Black\" size=\"15.0\" />\r\n         </font>\r\n      </Button>\r\n      <Text layoutX=\"82.0\" layoutY=\"109.0\" strokeType=\"OUTSIDE\" strokeWidth=\"0.0\" text=\"Pepsi ($1)\">\r\n         <font>\r\n            <Font name=\"Arial Black\" size=\"15.0\" />\r\n         </font></Text>\r\n      <Text layoutX=\"241.0\" layoutY=\"109.0\" strokeType=\"OUTSIDE\" strokeWidth=\"0.0\" text=\"Diet Pepsi ($1)\">\r\n         <font>\r\n            <Font name=\"Arial Black\" size=\"15.0\" />\r\n         </font></Text>\r\n      <Text layoutX=\"114.0\" layoutY=\"276.0\" strokeType=\"OUTSIDE\" strokeWidth=\"0.0\" text=\"Diet Orange ($1)\">\r\n         <font>\r\n            <Font name=\"Arial Black\" size=\"15.0\" />\r\n         </font></Text>\r\n      <Text layoutX=\"316.0\" layoutY=\"276.0\" strokeType=\"OUTSIDE\" strokeWidth=\"0.0\" text=\"Lemonade ($1)\">\r\n         <font>\r\n            <Font name=\"Arial Black\" size=\"15.0\" />\r\n         </font></Text>\r\n      <Text layoutX=\"394.0\" layoutY=\"109.0\" strokeType=\"OUTSIDE\" strokeWidth=\"0.0\" text=\"Orange ($1)\">\r\n         <font>\r\n            <Font name=\"Arial Black\" size=\"15.0\" />\r\n         </font></Text>\r\n   </children>\r\n</AnchorPane>\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/view/beveragePage.fxml	(revision 82652d1ff2bac00f992a9a1da02ee1f8a9ec1e31)
++++ src/view/beveragePage.fxml	(date 1638221564934)
+@@ -5,7 +5,7 @@
+ <?import javafx.scene.text.Font?>
+ <?import javafx.scene.text.Text?>
+ 
+-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.BeveragePageController">
++<AnchorPane fx:id="beveragePane" prefHeight="486.0" prefWidth="894.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.BeveragePageController">
+    <children>
+       <Button layoutX="90.0" layoutY="133.0" mnemonicParsing="false" onAction="#handlePepsiButton" style="-fx-background-color: red;" text="Order" textFill="WHITE">
+          <font>
+@@ -53,4 +53,4 @@
+             <Font name="Arial Black" size="15.0" />
+          </font></Text>
+    </children>
+-</AnchorPane>
++</AnchorPane>
+\ No newline at end of file
+Index: src/view/orderPageController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package view;\r\n\r\nimport javafx.event.ActionEvent;\r\nimport javafx.fxml.FXML;\r\nimport javafx.fxml.Initializable;\r\nimport javafx.scene.layout.Pane;\r\n\r\nimport java.net.URL;\r\nimport java.util.ResourceBundle;\r\n\r\npublic class orderPageController implements Initializable {\r\n\r\n\r\n    @FXML\r\n    private Pane MainPane;\r\n\r\n    @FXML\r\n    private void handlePizzaButton(ActionEvent event) {\r\n\r\n    }\r\n\r\n    @Override\r\n    public void initialize(URL location, ResourceBundle resources) {\r\n\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/view/orderPageController.java	(revision 82652d1ff2bac00f992a9a1da02ee1f8a9ec1e31)
++++ src/view/orderPageController.java	(date 1638221643899)
+@@ -2,25 +2,99 @@
+ 
+ import javafx.event.ActionEvent;
+ import javafx.fxml.FXML;
++import javafx.fxml.FXMLLoader;
+ import javafx.fxml.Initializable;
++import javafx.scene.Parent;
++import javafx.scene.Scene;
++import javafx.scene.layout.AnchorPane;
+ import javafx.scene.layout.Pane;
++import javafx.stage.Stage;
++import javafx.stage.StageStyle;
++import model.Customer;
++import org.apache.logging.log4j.Level;
++import org.apache.logging.log4j.LogManager;
++import org.apache.logging.log4j.Logger;
++import sample.Main;
+ 
++import java.io.IOException;
+ import java.net.URL;
+ import java.util.ResourceBundle;
+ 
+ public class orderPageController implements Initializable {
+ 
++    private final static Logger LOGGER = LogManager.getLogger(orderPageController.class.getName());
++
++    // Variable for storing current user
++    public static Customer currentCustomer;
+ 
+     @FXML
+-    private Pane MainPane;
++    private AnchorPane mainPane;
+ 
+     @FXML
+     private void handlePizzaButton(ActionEvent event) {
++        try {
++
++            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/pizzaPage.fxml"));
++            loader.load();
++            PizzaPageController controller = loader.getController();
++            mainPane.getChildren().clear();
++            mainPane.getChildren().add(controller.getPizzaPane());
++            //LibraryAssistantUtil.setStageIcon(stage);
++        } catch (IOException ex) {
++            LOGGER.log(Level.ERROR, "{}", ex);
++        }
++    }
+ 
++    @FXML
++    private void handleBeverageButton(ActionEvent event) {
++
++        try {
++
++            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/beveragePage.fxml"));
++            loader.load();
++            BeveragePageController controller = loader.getController();
++            mainPane.getChildren().clear();
++            mainPane.getChildren().add(controller.getBeveragePane());
++            //LibraryAssistantUtil.setStageIcon(stage);
++        } catch (IOException ex) {
++            LOGGER.log(Level.ERROR, "{}", ex);
++        }
++    }
++
++    @FXML
++    private void handleSidesButton(ActionEvent event) {
++
++        try {
++
++            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/sidePage.fxml"));
++            loader.load();
++            sidePageController controller = loader.getController();
++            mainPane.getChildren().clear();
++            mainPane.getChildren().add(controller.getSidesPane());
++            //LibraryAssistantUtil.setStageIcon(stage);
++        } catch (IOException ex) {
++            LOGGER.log(Level.ERROR, "{}", ex);
++        }
++    }
++
++    @FXML
++    private void handleCartButton(ActionEvent event) {
++
++        try {
++
++            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/cartPage.fxml"));
++            loader.load();
++            CartPageController controller = loader.getController();
++            mainPane.getChildren().clear();
++            mainPane.getChildren().add(controller.getCartPane());
++            //LibraryAssistantUtil.setStageIcon(stage);
++        } catch (IOException ex) {
++            LOGGER.log(Level.ERROR, "{}", ex);
++        }
+     }
+ 
+     @Override
+     public void initialize(URL location, ResourceBundle resources) {
+ 
+     }
+-}
++}
+\ No newline at end of file
+Index: src/view/orderPage.fxml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n\r\n<?import javafx.scene.control.Button?>\r\n<?import javafx.scene.layout.AnchorPane?>\r\n<?import javafx.scene.layout.Pane?>\r\n<?import javafx.scene.text.Font?>\r\n\r\n<AnchorPane prefHeight=\"400.0\" prefWidth=\"600.0\" xmlns=\"http://javafx.com/javafx/17\" xmlns:fx=\"http://javafx.com/fxml/1\" fx:controller=\"view.orderPageController\">\r\n   <children>\r\n      <Pane prefHeight=\"401.0\" prefWidth=\"135.0\">\r\n         <children>\r\n            <Button layoutY=\"27.0\" mnemonicParsing=\"false\" prefHeight=\"95.0\" prefWidth=\"135.0\" style=\"-fx-background-color: RED;\" text=\"PIZZA\" textFill=\"WHITE\">\r\n               <font>\r\n                  <Font name=\"Arial Black\" size=\"15.0\" />\r\n               </font>\r\n            </Button>\r\n            <Button layoutY=\"123.0\" mnemonicParsing=\"false\" prefHeight=\"95.0\" prefWidth=\"135.0\" style=\"-fx-background-color: RED;\" text=\"BEVERAGES\" textFill=\"WHITE\">\r\n               <font>\r\n                  <Font name=\"Arial Black\" size=\"15.0\" />\r\n               </font>\r\n            </Button>\r\n            <Button layoutY=\"218.0\" mnemonicParsing=\"false\" prefHeight=\"95.0\" prefWidth=\"135.0\" style=\"-fx-background-color: RED;\" text=\"SIDES\" textFill=\"WHITE\">\r\n               <font>\r\n                  <Font name=\"Arial Black\" size=\"15.0\" />\r\n               </font>\r\n            </Button>\r\n            <Button layoutY=\"313.0\" mnemonicParsing=\"false\" prefHeight=\"95.0\" prefWidth=\"135.0\" style=\"-fx-background-color: RED;\" text=\"CART\" textFill=\"WHITE\">\r\n               <font>\r\n                  <Font name=\"Arial Black\" size=\"15.0\" />\r\n               </font>\r\n            </Button>\r\n            <Button layoutY=\"2.0\" mnemonicParsing=\"false\" text=\"BACK\" />\r\n         </children>\r\n      </Pane>\r\n      <Pane layoutX=\"135.0\" prefHeight=\"401.0\" prefWidth=\"465.0\" />\r\n   </children>\r\n</AnchorPane>\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/view/orderPage.fxml	(revision 82652d1ff2bac00f992a9a1da02ee1f8a9ec1e31)
++++ src/view/orderPage.fxml	(date 1638221616567)
+@@ -5,33 +5,33 @@
+ <?import javafx.scene.layout.Pane?>
+ <?import javafx.scene.text.Font?>
+ 
+-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.orderPageController">
++<AnchorPane prefHeight="486.0" prefWidth="1040.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.orderPageController">
+    <children>
+-      <Pane prefHeight="401.0" prefWidth="135.0">
++      <Pane layoutY="32.0" prefHeight="454.0" prefWidth="135.0">
+          <children>
+-            <Button layoutY="27.0" mnemonicParsing="false" prefHeight="95.0" prefWidth="135.0" style="-fx-background-color: RED;" text="PIZZA" textFill="WHITE">
++            <Button mnemonicParsing="false" onAction="#handlePizzaButton" prefHeight="108.0" prefWidth="135.0" style="-fx-background-color: RED;" text="PIZZA" textFill="WHITE">
+                <font>
+                   <Font name="Arial Black" size="15.0" />
+                </font>
+             </Button>
+-            <Button layoutY="123.0" mnemonicParsing="false" prefHeight="95.0" prefWidth="135.0" style="-fx-background-color: RED;" text="BEVERAGES" textFill="WHITE">
++            <Button layoutY="102.0" mnemonicParsing="false" onAction="#handleBeverageButton" prefHeight="116.0" prefWidth="135.0" style="-fx-background-color: RED;" text="BEVERAGES" textFill="WHITE">
+                <font>
+                   <Font name="Arial Black" size="15.0" />
+                </font>
+             </Button>
+-            <Button layoutY="218.0" mnemonicParsing="false" prefHeight="95.0" prefWidth="135.0" style="-fx-background-color: RED;" text="SIDES" textFill="WHITE">
++            <Button layoutY="219.0" mnemonicParsing="false" onAction="#handleSidesButton" prefHeight="127.0" prefWidth="135.0" style="-fx-background-color: RED;" text="SIDES" textFill="WHITE">
+                <font>
+                   <Font name="Arial Black" size="15.0" />
+                </font>
+             </Button>
+-            <Button layoutY="313.0" mnemonicParsing="false" prefHeight="95.0" prefWidth="135.0" style="-fx-background-color: RED;" text="CART" textFill="WHITE">
++            <Button layoutY="346.0" mnemonicParsing="false" onAction="#handleCartButton" prefHeight="108.0" prefWidth="135.0" style="-fx-background-color: RED;" text="CART" textFill="WHITE">
+                <font>
+                   <Font name="Arial Black" size="15.0" />
+                </font>
+             </Button>
+-            <Button layoutY="2.0" mnemonicParsing="false" text="BACK" />
++            <AnchorPane fx:id="mainPane" layoutX="141.0" prefHeight="454.0" prefWidth="894.0" />
+          </children>
+       </Pane>
+-      <Pane layoutX="135.0" prefHeight="401.0" prefWidth="465.0" />
++      <Button layoutY="-1.0" mnemonicParsing="false" text="BACK" />
+    </children>
+-</AnchorPane>
++</AnchorPane>
+\ No newline at end of file
+Index: src/view/PizzaPageController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package view;\r\n\r\nimport javafx.fxml.Initializable;\r\n\r\nimport java.net.URL;\r\nimport java.util.ResourceBundle;\r\n\r\npublic class PizzaPageController implements Initializable {\r\n    @Override\r\n    public void initialize(URL location, ResourceBundle resources) {\r\n\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/view/PizzaPageController.java	(revision 82652d1ff2bac00f992a9a1da02ee1f8a9ec1e31)
++++ src/view/PizzaPageController.java	(date 1638221543860)
+@@ -1,13 +1,22 @@
+ package view;
+ 
++import javafx.fxml.FXML;
+ import javafx.fxml.Initializable;
++import javafx.scene.layout.AnchorPane;
+ 
+ import java.net.URL;
+ import java.util.ResourceBundle;
+ 
+ public class PizzaPageController implements Initializable {
++    @FXML
++    private AnchorPane pizzaPane;
++
++    public AnchorPane getPizzaPane() {
++        return pizzaPane;
++    }
++
+     @Override
+     public void initialize(URL location, ResourceBundle resources) {
+ 
+     }
+-}
++}
+\ No newline at end of file
+Index: src/view/pizzaPage.fxml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n\r\n<?import javafx.scene.control.Button?>\r\n<?import javafx.scene.control.Label?>\r\n<?import javafx.scene.control.RadioButton?>\r\n<?import javafx.scene.control.ToggleGroup?>\r\n<?import javafx.scene.layout.AnchorPane?>\r\n<?import javafx.scene.layout.Pane?>\r\n<?import javafx.scene.text.Font?>\r\n\r\n<AnchorPane xmlns=\"http://javafx.com/javafx/17\" xmlns:fx=\"http://javafx.com/fxml/1\" fx:controller=\"view.PizzaPageController\">\r\n   <children>\r\n      <Pane layoutX=\"134.0\" prefHeight=\"400.0\" prefWidth=\"459.0\" style=\"-fx-background-color: BLACK;\">\r\n         <children>\r\n            <Label layoutX=\"-134.0\" prefHeight=\"45.0\" prefWidth=\"599.0\" style=\"-fx-background-color: #d9d9d9;\" text=\"CRUST\" textFill=\"RED\" />\r\n            <Label layoutX=\"-134.0\" layoutY=\"90.0\" prefHeight=\"45.0\" prefWidth=\"599.0\" style=\"-fx-background-color: #d9d9d9;\" text=\"SIZE\" textFill=\"RED\" />\r\n            <Label alignment=\"TOP_LEFT\" layoutX=\"-134.0\" layoutY=\"45.0\" prefHeight=\"45.0\" prefWidth=\"599.0\" style=\"-fx-background-color: #eeeeee;\" text=\"THIN          REGULAR          PAN\" />\r\n            <Label alignment=\"TOP_LEFT\" layoutX=\"-134.0\" layoutY=\"135.0\" prefHeight=\"45.0\" prefWidth=\"599.0\" style=\"-fx-background-color: #eeeeee;\" text=\"SMALL          MEDIUM          LARGE          EXTRA LARGE\" />\r\n            <Label layoutX=\"-134.0\" layoutY=\"180.0\" prefHeight=\"45.0\" prefWidth=\"599.0\" style=\"-fx-background-color: #d9d9d9;\" text=\"TOPPINGS\" textFill=\"RED\" />\r\n            <Label alignment=\"TOP_LEFT\" layoutX=\"-134.0\" layoutY=\"225.0\" prefHeight=\"45.0\" prefWidth=\"599.0\" style=\"-fx-background-color: #eeeeee;\" text=\"CHEESE          PEPPERONI          SAUSAGE          HAM          GREEN PEPPERS\" />\r\n            <Label alignment=\"TOP_LEFT\" layoutX=\"-134.0\" layoutY=\"270.0\" prefHeight=\"45.0\" prefWidth=\"599.0\" style=\"-fx-background-color: #eeeeee;\" text=\"ONIONS          MUSHROOMS          PINEAPPLE          TOMATOES\" />\r\n            <RadioButton fx:id=\"thin\" layoutX=\"-128.0\" layoutY=\"67.0\" mnemonicParsing=\"false\">\r\n               <toggleGroup>\r\n                  <ToggleGroup fx:id=\"crust\" />\r\n               </toggleGroup>\r\n            </RadioButton>\r\n            <RadioButton fx:id=\"regular\" layoutX=\"-63.0\" layoutY=\"67.0\" mnemonicParsing=\"false\" toggleGroup=\"$crust\" />\r\n            <RadioButton fx:id=\"small\" layoutX=\"-128.0\" layoutY=\"158.0\" mnemonicParsing=\"false\">\r\n               <toggleGroup>\r\n                  <ToggleGroup fx:id=\"size\" />\r\n               </toggleGroup>\r\n            </RadioButton>\r\n            <RadioButton fx:id=\"medium\" layoutX=\"-55.0\" layoutY=\"158.0\" mnemonicParsing=\"false\" toggleGroup=\"$size\" />\r\n            <RadioButton fx:id=\"large\" layoutX=\"24.0\" layoutY=\"158.0\" mnemonicParsing=\"false\" toggleGroup=\"$size\" />\r\n            <RadioButton fx:id=\"extra_large\" layoutX=\"107.0\" layoutY=\"158.0\" mnemonicParsing=\"false\" toggleGroup=\"$size\" />\r\n            <RadioButton fx:id=\"cheese\" layoutX=\"-120.0\" layoutY=\"248.0\" mnemonicParsing=\"false\" />\r\n            <RadioButton fx:id=\"onions\" layoutX=\"-120.0\" layoutY=\"293.0\" mnemonicParsing=\"false\" />\r\n            <RadioButton fx:id=\"pepperoni\" layoutX=\"-39.0\" layoutY=\"248.0\" mnemonicParsing=\"false\" />\r\n            <RadioButton fx:id=\"sausage\" layoutX=\"47.0\" layoutY=\"248.0\" mnemonicParsing=\"false\" />\r\n            <RadioButton fx:id=\"ham\" layoutX=\"123.0\" layoutY=\"248.0\" mnemonicParsing=\"false\" />\r\n            <RadioButton fx:id=\"green_peppers\" layoutX=\"210.0\" layoutY=\"248.0\" mnemonicParsing=\"false\" />\r\n            <RadioButton fx:id=\"mushrooms\" layoutX=\"-31.0\" layoutY=\"293.0\" mnemonicParsing=\"false\" />\r\n            <RadioButton fx:id=\"pineapple\" layoutX=\"73.0\" layoutY=\"293.0\" mnemonicParsing=\"false\" />\r\n            <RadioButton fx:id=\"tomatoes\" layoutX=\"166.0\" layoutY=\"293.0\" mnemonicParsing=\"false\" />\r\n            <RadioButton fx:id=\"pan\" layoutX=\"16.0\" layoutY=\"67.0\" mnemonicParsing=\"false\" toggleGroup=\"$crust\" />\r\n            <Label layoutX=\"-134.0\" layoutY=\"315.0\" prefHeight=\"86.0\" prefWidth=\"599.0\" style=\"-fx-background-color: #d9d9d9;\" />\r\n            <Button layoutX=\"314.0\" layoutY=\"341.0\" mnemonicParsing=\"false\" style=\"-fx-background-color: RED;\" text=\"ADD TO CART\" textFill=\"WHITE\">\r\n               <font>\r\n                  <Font name=\"Arial Black\" size=\"15.0\" />\r\n               </font>\r\n            </Button>\r\n         </children>\r\n      </Pane>\r\n   </children>\r\n</AnchorPane>\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/view/pizzaPage.fxml	(revision 82652d1ff2bac00f992a9a1da02ee1f8a9ec1e31)
++++ src/view/pizzaPage.fxml	(date 1638221666354)
+@@ -8,43 +8,43 @@
+ <?import javafx.scene.layout.Pane?>
+ <?import javafx.scene.text.Font?>
+ 
+-<AnchorPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.PizzaPageController">
++<AnchorPane fx:id="pizzaPane" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.PizzaPageController">
+    <children>
+-      <Pane layoutX="134.0" prefHeight="400.0" prefWidth="459.0" style="-fx-background-color: BLACK;">
++      <Pane prefHeight="486.0" prefWidth="894.0" style="-fx-background-color: BLACK;">
+          <children>
+-            <Label layoutX="-134.0" prefHeight="45.0" prefWidth="599.0" style="-fx-background-color: #d9d9d9;" text="CRUST" textFill="RED" />
+-            <Label layoutX="-134.0" layoutY="90.0" prefHeight="45.0" prefWidth="599.0" style="-fx-background-color: #d9d9d9;" text="SIZE" textFill="RED" />
+-            <Label alignment="TOP_LEFT" layoutX="-134.0" layoutY="45.0" prefHeight="45.0" prefWidth="599.0" style="-fx-background-color: #eeeeee;" text="THIN          REGULAR          PAN" />
+-            <Label alignment="TOP_LEFT" layoutX="-134.0" layoutY="135.0" prefHeight="45.0" prefWidth="599.0" style="-fx-background-color: #eeeeee;" text="SMALL          MEDIUM          LARGE          EXTRA LARGE" />
+-            <Label layoutX="-134.0" layoutY="180.0" prefHeight="45.0" prefWidth="599.0" style="-fx-background-color: #d9d9d9;" text="TOPPINGS" textFill="RED" />
+-            <Label alignment="TOP_LEFT" layoutX="-134.0" layoutY="225.0" prefHeight="45.0" prefWidth="599.0" style="-fx-background-color: #eeeeee;" text="CHEESE          PEPPERONI          SAUSAGE          HAM          GREEN PEPPERS" />
+-            <Label alignment="TOP_LEFT" layoutX="-134.0" layoutY="270.0" prefHeight="45.0" prefWidth="599.0" style="-fx-background-color: #eeeeee;" text="ONIONS          MUSHROOMS          PINEAPPLE          TOMATOES" />
+-            <RadioButton fx:id="thin" layoutX="-128.0" layoutY="67.0" mnemonicParsing="false">
++            <Label prefHeight="45.0" prefWidth="894.0" style="-fx-background-color: #d9d9d9;" text=" CRUST" textFill="RED" />
++            <Label layoutX="-2.0" layoutY="90.0" prefHeight="45.0" prefWidth="901.0" style="-fx-background-color: #d9d9d9;" text=" SIZE" textFill="RED" />
++            <Label alignment="TOP_LEFT" layoutX="-2.0" layoutY="45.0" prefHeight="45.0" prefWidth="901.0" style="-fx-background-color: #eeeeee;" text=" THIN          REGULAR          PAN" />
++            <Label alignment="TOP_LEFT" layoutX="-2.0" layoutY="135.0" prefHeight="66.0" prefWidth="901.0" style="-fx-background-color: #eeeeee;" text=" SMALL          MEDIUM          LARGE          EXTRA LARGE" />
++            <Label layoutX="1.0" layoutY="195.0" prefHeight="52.0" prefWidth="894.0" style="-fx-background-color: #d9d9d9;" text="TOPPINGS" textFill="RED" />
++            <Label alignment="TOP_LEFT" layoutY="247.0" prefHeight="102.0" prefWidth="894.0" style="-fx-background-color: #eeeeee;" text=" CHEESE          PEPPERONI          SAUSAGE          HAM          GREEN PEPPERS" />
++            <Label alignment="TOP_LEFT" layoutX="-6.0" layoutY="316.0" prefHeight="83.0" prefWidth="901.0" style="-fx-background-color: #eeeeee;" text="  ONIONS          MUSHROOMS          PINEAPPLE          TOMATOES" />
++            <RadioButton fx:id="thin" layoutX="11.0" layoutY="67.0" mnemonicParsing="false">
+                <toggleGroup>
+                   <ToggleGroup fx:id="crust" />
+                </toggleGroup>
+             </RadioButton>
+-            <RadioButton fx:id="regular" layoutX="-63.0" layoutY="67.0" mnemonicParsing="false" toggleGroup="$crust" />
+-            <RadioButton fx:id="small" layoutX="-128.0" layoutY="158.0" mnemonicParsing="false">
++            <RadioButton fx:id="regular" layoutX="87.0" layoutY="67.0" mnemonicParsing="false" toggleGroup="$crust" />
++            <RadioButton fx:id="small" layoutX="11.0" layoutY="158.0" mnemonicParsing="false">
+                <toggleGroup>
+                   <ToggleGroup fx:id="size" />
+                </toggleGroup>
+             </RadioButton>
+-            <RadioButton fx:id="medium" layoutX="-55.0" layoutY="158.0" mnemonicParsing="false" toggleGroup="$size" />
+-            <RadioButton fx:id="large" layoutX="24.0" layoutY="158.0" mnemonicParsing="false" toggleGroup="$size" />
+-            <RadioButton fx:id="extra_large" layoutX="107.0" layoutY="158.0" mnemonicParsing="false" toggleGroup="$size" />
+-            <RadioButton fx:id="cheese" layoutX="-120.0" layoutY="248.0" mnemonicParsing="false" />
+-            <RadioButton fx:id="onions" layoutX="-120.0" layoutY="293.0" mnemonicParsing="false" />
+-            <RadioButton fx:id="pepperoni" layoutX="-39.0" layoutY="248.0" mnemonicParsing="false" />
+-            <RadioButton fx:id="sausage" layoutX="47.0" layoutY="248.0" mnemonicParsing="false" />
+-            <RadioButton fx:id="ham" layoutX="123.0" layoutY="248.0" mnemonicParsing="false" />
+-            <RadioButton fx:id="green_peppers" layoutX="210.0" layoutY="248.0" mnemonicParsing="false" />
+-            <RadioButton fx:id="mushrooms" layoutX="-31.0" layoutY="293.0" mnemonicParsing="false" />
+-            <RadioButton fx:id="pineapple" layoutX="73.0" layoutY="293.0" mnemonicParsing="false" />
+-            <RadioButton fx:id="tomatoes" layoutX="166.0" layoutY="293.0" mnemonicParsing="false" />
+-            <RadioButton fx:id="pan" layoutX="16.0" layoutY="67.0" mnemonicParsing="false" toggleGroup="$crust" />
+-            <Label layoutX="-134.0" layoutY="315.0" prefHeight="86.0" prefWidth="599.0" style="-fx-background-color: #d9d9d9;" />
+-            <Button layoutX="314.0" layoutY="341.0" mnemonicParsing="false" style="-fx-background-color: RED;" text="ADD TO CART" textFill="WHITE">
++            <RadioButton fx:id="medium" layoutX="101.0" layoutY="158.0" mnemonicParsing="false" toggleGroup="$size" />
++            <RadioButton fx:id="large" layoutX="194.0" layoutY="158.0" mnemonicParsing="false" toggleGroup="$size" />
++            <RadioButton fx:id="extra_large" layoutX="304.0" layoutY="158.0" mnemonicParsing="false" toggleGroup="$size" />
++            <RadioButton fx:id="cheese" layoutX="11.0" layoutY="280.0" mnemonicParsing="false" />
++            <RadioButton fx:id="onions" layoutX="11.0" layoutY="358.0" mnemonicParsing="false" />
++            <RadioButton fx:id="pepperoni" layoutX="116.0" layoutY="280.0" mnemonicParsing="false" />
++            <RadioButton fx:id="sausage" layoutX="221.0" layoutY="269.0" mnemonicParsing="false" />
++            <RadioButton fx:id="ham" layoutX="318.0" layoutY="269.0" mnemonicParsing="false" />
++            <RadioButton fx:id="green_peppers" layoutX="421.0" layoutY="269.0" mnemonicParsing="false" />
++            <RadioButton fx:id="mushrooms" layoutX="129.0" layoutY="358.0" mnemonicParsing="false" />
++            <RadioButton fx:id="pineapple" layoutX="248.0" layoutY="347.0" mnemonicParsing="false" />
++            <RadioButton fx:id="tomatoes" layoutX="371.0" layoutY="347.0" mnemonicParsing="false" />
++            <RadioButton fx:id="pan" layoutX="180.0" layoutY="67.0" mnemonicParsing="false" toggleGroup="$crust" />
++            <Label layoutX="-6.0" layoutY="397.0" prefHeight="89.0" prefWidth="901.0" style="-fx-background-color: #d9d9d9;" />
++            <Button layoutX="730.0" layoutY="424.0" mnemonicParsing="false" style="-fx-background-color: RED;" text="ADD TO CART" textFill="WHITE">
+                <font>
+                   <Font name="Arial Black" size="15.0" />
+                </font>
+@@ -52,4 +52,4 @@
+          </children>
+       </Pane>
+    </children>
+-</AnchorPane>
++</AnchorPane>
+\ No newline at end of file
+Index: src/view/PizzaRestaurantMain.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package view;\r\n\r\nimport javafx.application.Application;\r\nimport javafx.fxml.FXMLLoader;\r\nimport javafx.scene.Parent;\r\nimport javafx.scene.Scene;\r\nimport javafx.stage.Stage;\r\n\r\nimport java.io.IOException;\r\n\r\npublic class PizzaRestaurantMain extends Application {\r\n\r\n    public static void main(String[] args) {\r\n        launch(args);\r\n    }\r\n\r\n    @Override\r\n    public void start(Stage primaryStage) throws IOException {\r\n        Parent root = FXMLLoader.load(getClass().getResource(\"pizzaPage.fxml\"));\r\n\r\n        Scene scene = new Scene(root);\r\n\r\n        primaryStage.setScene(scene);\r\n        primaryStage.show();\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/view/PizzaRestaurantMain.java	(revision 82652d1ff2bac00f992a9a1da02ee1f8a9ec1e31)
++++ src/view/PizzaRestaurantMain.java	(date 1638220285303)
+@@ -16,7 +16,7 @@
+ 
+     @Override
+     public void start(Stage primaryStage) throws IOException {
+-        Parent root = FXMLLoader.load(getClass().getResource("pizzaPage.fxml"));
++        Parent root = FXMLLoader.load(getClass().getResource("homePage.fxml"));
+ 
+         Scene scene = new Scene(root);
+ 
+Index: out/production/Pizza_Restaurant/view/login.fxml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n\r\n<?import javafx.scene.control.Button?>\r\n<?import javafx.scene.control.PasswordField?>\r\n<?import javafx.scene.control.TextField?>\r\n<?import javafx.scene.layout.AnchorPane?>\r\n<?import javafx.scene.text.Text?>\r\n\r\n\r\n<AnchorPane prefHeight=\"400.0\" prefWidth=\"600.0\" xmlns=\"http://javafx.com/javafx/8.0.141\" xmlns:fx=\"http://javafx.com/fxml/1\" fx:controller=\"view.LoginController\">\r\n   <children>\r\n      <Button layoutX=\"417.0\" layoutY=\"302.0\" mnemonicParsing=\"false\" onAction=\"#handleLoginButtonAction\" text=\"Login\" />\r\n      <Button layoutX=\"99.0\" layoutY=\"302.0\" mnemonicParsing=\"false\" onAction=\"#handleCancelButtonAction\" text=\"Cancel\" />\r\n      <TextField fx:id=\"phoneNumberTxtField\" layoutX=\"230.0\" layoutY=\"104.0\" />\r\n      <Text layoutX=\"100.0\" layoutY=\"125.0\" strokeType=\"OUTSIDE\" strokeWidth=\"0.0\" text=\"Phone Number\" />\r\n      <Text layoutX=\"100.0\" layoutY=\"206.0\" strokeType=\"OUTSIDE\" strokeWidth=\"0.0\" text=\"Password\" />\r\n      <PasswordField fx:id=\"passwordTxtField\" layoutX=\"230.0\" layoutY=\"185.0\" />\r\n      <Text fx:id=\"errorText\" layoutX=\"261.0\" layoutY=\"267.0\" strokeType=\"OUTSIDE\" strokeWidth=\"0.0\" />\r\n   </children>\r\n</AnchorPane>\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- out/production/Pizza_Restaurant/view/login.fxml	(revision 82652d1ff2bac00f992a9a1da02ee1f8a9ec1e31)
++++ out/production/Pizza_Restaurant/view/login.fxml	(date 1638218701128)
+@@ -1,13 +1,14 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ 
+ <?import javafx.scene.control.Button?>
++<?import javafx.scene.control.Label?>
+ <?import javafx.scene.control.PasswordField?>
+ <?import javafx.scene.control.TextField?>
+ <?import javafx.scene.layout.AnchorPane?>
++<?import javafx.scene.text.Font?>
+ <?import javafx.scene.text.Text?>
+ 
+-
+-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.LoginController">
++<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.LoginController">
+    <children>
+       <Button layoutX="417.0" layoutY="302.0" mnemonicParsing="false" onAction="#handleLoginButtonAction" text="Login" />
+       <Button layoutX="99.0" layoutY="302.0" mnemonicParsing="false" onAction="#handleCancelButtonAction" text="Cancel" />
+@@ -16,5 +17,10 @@
+       <Text layoutX="100.0" layoutY="206.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password" />
+       <PasswordField fx:id="passwordTxtField" layoutX="230.0" layoutY="185.0" />
+       <Text fx:id="errorText" layoutX="261.0" layoutY="267.0" strokeType="OUTSIDE" strokeWidth="0.0" />
++      <Label alignment="CENTER" prefHeight="48.0" prefWidth="600.0" style="-fx-background-color: RED;" text="LOGIN" textFill="WHITE">
++         <font>
++            <Font name="Bernard MT Condensed" size="48.0" />
++         </font>
++      </Label>
+    </children>
+ </AnchorPane>
+Index: src/view/BeveragePageController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package view;\r\n\r\nimport javafx.event.ActionEvent;\r\nimport javafx.fxml.FXML;\r\nimport javafx.fxml.FXMLLoader;\r\nimport javafx.fxml.Initializable;\r\nimport javafx.scene.Parent;\r\nimport javafx.scene.Scene;\r\nimport javafx.stage.Stage;\r\nimport javafx.stage.StageStyle;\r\nimport org.apache.logging.log4j.Level;\r\nimport org.apache.logging.log4j.LogManager;\r\nimport org.apache.logging.log4j.Logger;\r\n\r\nimport java.io.IOException;\r\nimport java.net.URL;\r\nimport java.util.ResourceBundle;\r\n\r\npublic class BeveragePageController implements Initializable {\r\n\r\n    private final static Logger LOGGER = LogManager.getLogger(BeveragePageController.class.getName());\r\n\r\n    @FXML\r\n    private void handlePepsiButton(ActionEvent event) {\r\n        try {\r\n            FXMLLoader loader = new FXMLLoader(getClass().getResource(\"/view/beverageItemPage.fxml\"));\r\n            Parent parent = loader.load();\r\n            BeverageItemPageController controller = loader.getController();\r\n            controller.setNameText(\"Pepsi\");\r\n            Stage stage = new Stage(StageStyle.DECORATED);\r\n            stage.setTitle(\"Pizza App\");\r\n            stage.setScene(new Scene(parent));\r\n            stage.show();\r\n            //LibraryAssistantUtil.setStageIcon(stage);\r\n        } catch (IOException ex) {\r\n            LOGGER.log(Level.ERROR, \"{}\", ex);\r\n        }\r\n    }\r\n\r\n    @FXML\r\n    private void handleDietPepsiButton(ActionEvent event) {\r\n        try {\r\n            FXMLLoader loader = new FXMLLoader(getClass().getResource(\"/view/beverageItemPage.fxml\"));\r\n            Parent parent = loader.load();\r\n            BeverageItemPageController controller = loader.getController();\r\n            controller.setNameText(\"Diet Pepsi\");\r\n            Stage stage = new Stage(StageStyle.DECORATED);\r\n            stage.setTitle(\"Pizza App\");\r\n            stage.setScene(new Scene(parent));\r\n            stage.show();\r\n            //LibraryAssistantUtil.setStageIcon(stage);\r\n        } catch (IOException ex) {\r\n            LOGGER.log(Level.ERROR, \"{}\", ex);\r\n        }\r\n    }\r\n\r\n    @FXML\r\n    private void handleOrangeButton(ActionEvent event) {\r\n        try {\r\n            FXMLLoader loader = new FXMLLoader(getClass().getResource(\"/view/beverageItemPage.fxml\"));\r\n            Parent parent = loader.load();\r\n            BeverageItemPageController controller = loader.getController();\r\n            controller.setNameText(\"Orange\");\r\n            Stage stage = new Stage(StageStyle.DECORATED);\r\n            stage.setTitle(\"Pizza App\");\r\n            stage.setScene(new Scene(parent));\r\n            stage.show();\r\n            //LibraryAssistantUtil.setStageIcon(stage);\r\n        } catch (IOException ex) {\r\n            LOGGER.log(Level.ERROR, \"{}\", ex);\r\n        }\r\n    }\r\n\r\n    @FXML\r\n    private void handleDietOrangeButton(ActionEvent event) {\r\n        try {\r\n            FXMLLoader loader = new FXMLLoader(getClass().getResource(\"/view/beverageItemPage.fxml\"));\r\n            Parent parent = loader.load();\r\n            BeverageItemPageController controller = loader.getController();\r\n            controller.setNameText(\"Diet Orange\");\r\n            Stage stage = new Stage(StageStyle.DECORATED);\r\n            stage.setTitle(\"Pizza App\");\r\n            stage.setScene(new Scene(parent));\r\n            stage.show();\r\n            //LibraryAssistantUtil.setStageIcon(stage);\r\n        } catch (IOException ex) {\r\n            LOGGER.log(Level.ERROR, \"{}\", ex);\r\n        }\r\n    }\r\n\r\n    @FXML\r\n    private void handleLemonadeButton(ActionEvent event) {\r\n        try {\r\n            FXMLLoader loader = new FXMLLoader(getClass().getResource(\"/view/beverageItemPage.fxml\"));\r\n            Parent parent = loader.load();\r\n            BeverageItemPageController controller = loader.getController();\r\n            controller.setNameText(\"Lemonade\");\r\n            Stage stage = new Stage(StageStyle.DECORATED);\r\n            stage.setTitle(\"Pizza App\");\r\n            stage.setScene(new Scene(parent));\r\n            stage.show();\r\n            //LibraryAssistantUtil.setStageIcon(stage);\r\n        } catch (IOException ex) {\r\n            LOGGER.log(Level.ERROR, \"{}\", ex);\r\n        }\r\n    }\r\n\r\n    @Override\r\n    public void initialize(URL location, ResourceBundle resources) {\r\n\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/view/BeveragePageController.java	(revision 82652d1ff2bac00f992a9a1da02ee1f8a9ec1e31)
++++ src/view/BeveragePageController.java	(date 1638221517179)
+@@ -6,6 +6,7 @@
+ import javafx.fxml.Initializable;
+ import javafx.scene.Parent;
+ import javafx.scene.Scene;
++import javafx.scene.layout.AnchorPane;
+ import javafx.stage.Stage;
+ import javafx.stage.StageStyle;
+ import org.apache.logging.log4j.Level;
+@@ -20,6 +21,13 @@
+ 
+     private final static Logger LOGGER = LogManager.getLogger(BeveragePageController.class.getName());
+ 
++    @FXML
++    private AnchorPane beveragePane;
++
++    public AnchorPane getBeveragePane() {
++        return beveragePane;
++    }
++
+     @FXML
+     private void handlePepsiButton(ActionEvent event) {
+         try {
+@@ -109,4 +117,4 @@
+     public void initialize(URL location, ResourceBundle resources) {
+ 
+     }
+-}
++}
+\ No newline at end of file
+Index: src/view/homePage.fxml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n\r\n<?import javafx.scene.control.Button?>\r\n<?import javafx.scene.control.Label?>\r\n<?import javafx.scene.layout.AnchorPane?>\r\n<?import javafx.scene.text.Font?>\r\n\r\n\r\n<AnchorPane prefHeight=\"400.0\" prefWidth=\"600.0\" xmlns=\"http://javafx.com/javafx/17\" xmlns:fx=\"http://javafx.com/fxml/1\" fx:controller=\"view.HomePageController\">\r\n   <children>\r\n      <Label prefHeight=\"48.0\" prefWidth=\"600.0\" style=\"-fx-background-color: RED;\" text=\" Mom and Pop's\" textFill=\"WHITE\">\r\n         <font>\r\n            <Font name=\"Bernard MT Condensed\" size=\"48.0\" />\r\n         </font>\r\n      </Label>\r\n      <Button fx:id=\"create_pizza\" layoutX=\"179.0\" layoutY=\"183.0\" mnemonicParsing=\"false\" style=\"-fx-background-color: RED;\" text=\"CREATE YOUR OWN PIZZA\" textFill=\"WHITE\">\r\n         <font>\r\n            <Font name=\"Arial Black\" size=\"15.0\" />\r\n         </font>\r\n      </Button>\r\n      <Label layoutX=\"198.0\" layoutY=\"368.0\" text=\"680 Arntson Drive, Marietta, GA 30060\" />\r\n      <Button fx:id=\"login\" layoutX=\"512.0\" layoutY=\"13.0\" mnemonicParsing=\"false\" style=\"-fx-background-color: #980000;\" text=\"LOGIN\" textFill=\"WHITE\">\r\n         <font>\r\n            <Font name=\"Arial Black\" size=\"15.0\" />\r\n         </font>\r\n      </Button>\r\n   </children>\r\n</AnchorPane>\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/view/homePage.fxml	(revision 82652d1ff2bac00f992a9a1da02ee1f8a9ec1e31)
++++ src/view/homePage.fxml	(date 1638220262379)
+@@ -5,21 +5,20 @@
+ <?import javafx.scene.layout.AnchorPane?>
+ <?import javafx.scene.text.Font?>
+ 
+-
+-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.HomePageController">
++<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.HomePageController">
+    <children>
+       <Label prefHeight="48.0" prefWidth="600.0" style="-fx-background-color: RED;" text=" Mom and Pop's" textFill="WHITE">
+          <font>
+             <Font name="Bernard MT Condensed" size="48.0" />
+          </font>
+       </Label>
+-      <Button fx:id="create_pizza" layoutX="179.0" layoutY="183.0" mnemonicParsing="false" style="-fx-background-color: RED;" text="CREATE YOUR OWN PIZZA" textFill="WHITE">
++      <Button fx:id="create_pizza" layoutX="179.0" layoutY="183.0" mnemonicParsing="false" onAction="#handleCreatePizzaButton" style="-fx-background-color: RED;" text="CREATE YOUR OWN PIZZA" textFill="WHITE">
+          <font>
+             <Font name="Arial Black" size="15.0" />
+          </font>
+       </Button>
+       <Label layoutX="198.0" layoutY="368.0" text="680 Arntson Drive, Marietta, GA 30060" />
+-      <Button fx:id="login" layoutX="512.0" layoutY="13.0" mnemonicParsing="false" style="-fx-background-color: #980000;" text="LOGIN" textFill="WHITE">
++      <Button fx:id="login" layoutX="512.0" layoutY="13.0" mnemonicParsing="false" onAction="#handleLoginButton" style="-fx-background-color: #980000;" text="LOGIN" textFill="WHITE">
+          <font>
+             <Font name="Arial Black" size="15.0" />
+          </font>
+Index: out/production/Pizza_Restaurant/view/homePage.fxml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n\r\n<?import java.lang.*?>\r\n<?import java.util.*?>\r\n<?import javafx.scene.*?>\r\n<?import javafx.scene.control.*?>\r\n<?import javafx.scene.layout.*?>\r\n\r\n<AnchorPane xmlns=\"http://javafx.com/javafx\"\r\n            xmlns:fx=\"http://javafx.com/fxml\"\r\n            fx:controller=\"view.HomePageController\"\r\n            prefHeight=\"400.0\" prefWidth=\"600.0\">\r\n\r\n</AnchorPane>\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- out/production/Pizza_Restaurant/view/homePage.fxml	(revision 82652d1ff2bac00f992a9a1da02ee1f8a9ec1e31)
++++ out/production/Pizza_Restaurant/view/homePage.fxml	(date 1638220262379)
+@@ -1,14 +1,27 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ 
+-<?import java.lang.*?>
+-<?import java.util.*?>
+-<?import javafx.scene.*?>
+-<?import javafx.scene.control.*?>
+-<?import javafx.scene.layout.*?>
++<?import javafx.scene.control.Button?>
++<?import javafx.scene.control.Label?>
++<?import javafx.scene.layout.AnchorPane?>
++<?import javafx.scene.text.Font?>
+ 
+-<AnchorPane xmlns="http://javafx.com/javafx"
+-            xmlns:fx="http://javafx.com/fxml"
+-            fx:controller="view.HomePageController"
+-            prefHeight="400.0" prefWidth="600.0">
+-
++<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.HomePageController">
++   <children>
++      <Label prefHeight="48.0" prefWidth="600.0" style="-fx-background-color: RED;" text=" Mom and Pop's" textFill="WHITE">
++         <font>
++            <Font name="Bernard MT Condensed" size="48.0" />
++         </font>
++      </Label>
++      <Button fx:id="create_pizza" layoutX="179.0" layoutY="183.0" mnemonicParsing="false" onAction="#handleCreatePizzaButton" style="-fx-background-color: RED;" text="CREATE YOUR OWN PIZZA" textFill="WHITE">
++         <font>
++            <Font name="Arial Black" size="15.0" />
++         </font>
++      </Button>
++      <Label layoutX="198.0" layoutY="368.0" text="680 Arntson Drive, Marietta, GA 30060" />
++      <Button fx:id="login" layoutX="512.0" layoutY="13.0" mnemonicParsing="false" onAction="#handleLoginButton" style="-fx-background-color: #980000;" text="LOGIN" textFill="WHITE">
++         <font>
++            <Font name="Arial Black" size="15.0" />
++         </font>
++      </Button>
++   </children>
+ </AnchorPane>
+Index: src/view/HomePageController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package view;\r\n\r\nimport javafx.fxml.Initializable;\r\nimport model.Customer;\r\n\r\nimport java.net.URL;\r\nimport java.util.ResourceBundle;\r\n\r\npublic class HomePageController implements Initializable {\r\n\r\n    // Variable for storing current user\r\n    public static Customer currentCustomer;\r\n\r\n    @Override\r\n    public void initialize(URL location, ResourceBundle resources) {\r\n\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/view/HomePageController.java	(revision 82652d1ff2bac00f992a9a1da02ee1f8a9ec1e31)
++++ src/view/HomePageController.java	(date 1638220992746)
+@@ -1,18 +1,69 @@
+ package view;
+ 
++import javafx.event.ActionEvent;
++import javafx.fxml.FXML;
++import javafx.fxml.FXMLLoader;
+ import javafx.fxml.Initializable;
++import javafx.scene.Parent;
++import javafx.scene.Scene;
++import javafx.scene.control.Button;
++import javafx.stage.Stage;
++import javafx.stage.StageStyle;
+ import model.Customer;
++import org.apache.logging.log4j.Level;
++import org.apache.logging.log4j.LogManager;
++import org.apache.logging.log4j.Logger;
+ 
++import java.io.IOException;
+ import java.net.URL;
+ import java.util.ResourceBundle;
+ 
+ public class HomePageController implements Initializable {
+ 
++    private final static Logger LOGGER = LogManager.getLogger(HomePageController.class.getName());
++
++    @FXML
++    private Button create_pizza;
++
++    @FXML
++    private Button login;
++
+     // Variable for storing current user
+-    public static Customer currentCustomer;
++    public static Customer currentCustomer = null;
++
++    @FXML
++    private void handleLoginButton(ActionEvent event) throws IOException {
++        Parent root = FXMLLoader.load(getClass().getResource("login.fxml"));
++
++        Scene scene = new Scene(root);
++
++        Stage primaryStage = new Stage(StageStyle.DECORATED);
++        primaryStage.setScene(scene);
++        ((Stage) login.getScene().getWindow()).close();
++        primaryStage.show();
++    }
++
++    @FXML
++    private void handleCreatePizzaButton(ActionEvent event) {
++
++        try {
++            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/orderPage.fxml"));
++            Parent parent = loader.load();
++            orderPageController controller = loader.getController();
++            controller.currentCustomer = currentCustomer;
++            Stage stage = new Stage(StageStyle.DECORATED);
++            stage.setTitle("Pizza App");
++            stage.setScene(new Scene(parent));
++            ((Stage) create_pizza.getScene().getWindow()).close();
++            stage.show();
++            //LibraryAssistantUtil.setStageIcon(stage);
++        } catch (IOException ex) {
++            LOGGER.log(Level.ERROR, "{}", ex);
++        }
++    }
+ 
+     @Override
+     public void initialize(URL location, ResourceBundle resources) {
+ 
+     }
+-}
++}
+\ No newline at end of file

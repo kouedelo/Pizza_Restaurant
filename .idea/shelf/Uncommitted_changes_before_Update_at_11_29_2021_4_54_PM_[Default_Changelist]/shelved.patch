@@ -1,0 +1,101 @@
+Index: src/view/beverageItemPage.fxml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n\r\n<?import javafx.scene.control.Button?>\r\n<?import javafx.scene.control.RadioButton?>\r\n<?import javafx.scene.control.TextField?>\r\n<?import javafx.scene.control.ToggleGroup?>\r\n<?import javafx.scene.layout.AnchorPane?>\r\n<?import javafx.scene.text.Font?>\r\n<?import javafx.scene.text.Text?>\r\n\r\n\r\n<AnchorPane prefHeight=\"400.0\" prefWidth=\"600.0\" xmlns=\"http://javafx.com/javafx/8.0.141\" xmlns:fx=\"http://javafx.com/fxml/1\" fx:controller=\"view.BeverageItemPageController\">\r\n   <children>\r\n      <RadioButton fx:id=\"smallRadioBtn\" layoutX=\"197.0\" layoutY=\"213.0\" mnemonicParsing=\"false\" text=\"Small\">\r\n         <toggleGroup>\r\n            <ToggleGroup fx:id=\"size\" />\r\n         </toggleGroup>\r\n      </RadioButton>\r\n      <Text layoutX=\"134.0\" layoutY=\"229.0\" strokeType=\"OUTSIDE\" strokeWidth=\"0.0\" text=\"Size:\" />\r\n      <Button layoutX=\"443.0\" layoutY=\"333.0\" mnemonicParsing=\"false\" style=\"-fx-background-color: red;\" text=\"Add to cart\" textFill=\"WHITE\">\r\n         <font>\r\n            <Font name=\"Arial Black\" size=\"15.0\" />\r\n         </font>\r\n      </Button>\r\n      <RadioButton fx:id=\"mediumRadioBtn\" layoutX=\"309.0\" layoutY=\"213.0\" mnemonicParsing=\"false\" text=\"Medium\" toggleGroup=\"$size\" />\r\n      <RadioButton fx:id=\"largeRadioBtn\" layoutX=\"435.0\" layoutY=\"213.0\" mnemonicParsing=\"false\" text=\"Large\" toggleGroup=\"$size\" />\r\n      <Text layoutX=\"129.0\" layoutY=\"94.0\" strokeType=\"OUTSIDE\" strokeWidth=\"0.0\" text=\"Beverage Name:\" />\r\n      <Text fx:id=\"nameText\" layoutX=\"296.0\" layoutY=\"94.0\" strokeType=\"OUTSIDE\" strokeWidth=\"0.0\" wrappingWidth=\"90.0\" />\r\n      <Text layoutX=\"129.0\" layoutY=\"145.0\" strokeType=\"OUTSIDE\" strokeWidth=\"0.0\" text=\"Quantity:\" />\r\n      <TextField fx:id=\"quantityTxtField\" layoutX=\"282.0\" layoutY=\"124.0\" prefHeight=\"31.0\" prefWidth=\"137.0\" />\r\n   </children>\r\n</AnchorPane>\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/view/beverageItemPage.fxml	(revision 5483a44a55ed03776775766fab501b4c90b4509d)
++++ src/view/beverageItemPage.fxml	(date 1638222887680)
+@@ -8,7 +8,6 @@
+ <?import javafx.scene.text.Font?>
+ <?import javafx.scene.text.Text?>
+ 
+-
+ <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.BeverageItemPageController">
+    <children>
+       <RadioButton fx:id="smallRadioBtn" layoutX="197.0" layoutY="213.0" mnemonicParsing="false" text="Small">
+@@ -17,7 +16,7 @@
+          </toggleGroup>
+       </RadioButton>
+       <Text layoutX="134.0" layoutY="229.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Size:" />
+-      <Button layoutX="443.0" layoutY="333.0" mnemonicParsing="false" style="-fx-background-color: red;" text="Add to cart" textFill="WHITE">
++      <Button layoutX="443.0" layoutY="333.0" mnemonicParsing="false" onAction="#handleAddToCartButton" style="-fx-background-color: red;" text="Add to cart" textFill="WHITE">
+          <font>
+             <Font name="Arial Black" size="15.0" />
+          </font>
+@@ -29,4 +28,4 @@
+       <Text layoutX="129.0" layoutY="145.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Quantity:" />
+       <TextField fx:id="quantityTxtField" layoutX="282.0" layoutY="124.0" prefHeight="31.0" prefWidth="137.0" />
+    </children>
+-</AnchorPane>
++</AnchorPane>
+\ No newline at end of file
+Index: src/view/cartPage.fxml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n\r\n<?import javafx.scene.control.Button?>\r\n<?import javafx.scene.control.TableColumn?>\r\n<?import javafx.scene.control.TableView?>\r\n<?import javafx.scene.layout.AnchorPane?>\r\n<?import javafx.scene.text.Font?>\r\n<?import javafx.scene.text.Text?>\r\n\r\n<AnchorPane fx:id=\"cartPane\" prefHeight=\"486.0\" prefWidth=\"894.0\" xmlns=\"http://javafx.com/javafx/8.0.141\" xmlns:fx=\"http://javafx.com/fxml/1\" fx:controller=\"view.CartPageController\">\r\n   <children>\r\n      <TableView fx:id=\"orderTable\" layoutX=\"16.0\" layoutY=\"43.0\" prefHeight=\"332.0\" prefWidth=\"863.0\">\r\n        <columns>\r\n          <TableColumn fx:id=\"pizzaSizeColumn\" prefWidth=\"97.0\" text=\"Pizza Size\" />\r\n          <TableColumn fx:id=\"pizzaCrustColumn\" prefWidth=\"111.0\" text=\"Pizza Crust\" />\r\n            <TableColumn fx:id=\"pizzaToppingsColumn\" prefWidth=\"218.0\" text=\"Pizza Toppings\" />\r\n            <TableColumn fx:id=\"nameColumn\" minWidth=\"9.0\" prefWidth=\"182.0\" text=\"Name\" />\r\n            <TableColumn fx:id=\"quantityColumn\" prefWidth=\"151.0\" text=\"Quantity\" />\r\n            <TableColumn fx:id=\"prizeColumn\" prefWidth=\"103.0\" text=\"Prize\" />\r\n        </columns>\r\n      </TableView>\r\n      <Button layoutX=\"34.0\" layoutY=\"394.0\" mnemonicParsing=\"false\" onAction=\"#handleEditButton\" prefHeight=\"31.0\" prefWidth=\"65.0\" style=\"-fx-background-color: red;\" text=\"Edit\" textFill=\"WHITE\">\r\n         <font>\r\n            <Font name=\"Arial Black\" size=\"15.0\" />\r\n         </font>\r\n      </Button>\r\n      <Button layoutX=\"147.0\" layoutY=\"394.0\" mnemonicParsing=\"false\" onAction=\"#handleRemoveButton\" style=\"-fx-background-color: red;\" text=\"Remove\" textFill=\"WHITE\">\r\n         <font>\r\n            <Font name=\"Arial Black\" size=\"15.0\" />\r\n         </font></Button>\r\n      <Button layoutX=\"721.0\" layoutY=\"410.0\" mnemonicParsing=\"false\" onAction=\"#handleCheckoutButton\" style=\"-fx-background-color: red;\" text=\"Go to checkout\" textFill=\"WHITE\">\r\n         <font>\r\n            <Font name=\"Arial Black\" size=\"15.0\" />\r\n         </font></Button>\r\n      <Text layoutX=\"414.0\" layoutY=\"430.0\" strokeType=\"OUTSIDE\" strokeWidth=\"0.0\" text=\"Subtotal:\" wrappingWidth=\"65.00000238418579\" />\r\n      <Text fx:id=\"priceText\" layoutX=\"490.0\" layoutY=\"430.0\" strokeType=\"OUTSIDE\" strokeWidth=\"0.0\" wrappingWidth=\"58.0\" />\r\n   </children>\r\n</AnchorPane>\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/view/cartPage.fxml	(revision 5483a44a55ed03776775766fab501b4c90b4509d)
++++ src/view/cartPage.fxml	(date 1638222868066)
+@@ -8,31 +8,31 @@
+ <?import javafx.scene.text.Text?>
+ 
+ <AnchorPane fx:id="cartPane" prefHeight="486.0" prefWidth="894.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.CartPageController">
+-   <children>
+-      <TableView fx:id="orderTable" layoutX="16.0" layoutY="43.0" prefHeight="332.0" prefWidth="863.0">
+-        <columns>
+-          <TableColumn fx:id="pizzaSizeColumn" prefWidth="97.0" text="Pizza Size" />
+-          <TableColumn fx:id="pizzaCrustColumn" prefWidth="111.0" text="Pizza Crust" />
+-            <TableColumn fx:id="pizzaToppingsColumn" prefWidth="218.0" text="Pizza Toppings" />
+-            <TableColumn fx:id="nameColumn" minWidth="9.0" prefWidth="182.0" text="Name" />
+-            <TableColumn fx:id="quantityColumn" prefWidth="151.0" text="Quantity" />
+-            <TableColumn fx:id="prizeColumn" prefWidth="103.0" text="Prize" />
+-        </columns>
+-      </TableView>
+-      <Button layoutX="34.0" layoutY="394.0" mnemonicParsing="false" onAction="#handleEditButton" prefHeight="31.0" prefWidth="65.0" style="-fx-background-color: red;" text="Edit" textFill="WHITE">
+-         <font>
+-            <Font name="Arial Black" size="15.0" />
+-         </font>
+-      </Button>
+-      <Button layoutX="147.0" layoutY="394.0" mnemonicParsing="false" onAction="#handleRemoveButton" style="-fx-background-color: red;" text="Remove" textFill="WHITE">
+-         <font>
+-            <Font name="Arial Black" size="15.0" />
+-         </font></Button>
+-      <Button layoutX="721.0" layoutY="410.0" mnemonicParsing="false" onAction="#handleCheckoutButton" style="-fx-background-color: red;" text="Go to checkout" textFill="WHITE">
+-         <font>
+-            <Font name="Arial Black" size="15.0" />
+-         </font></Button>
+-      <Text layoutX="414.0" layoutY="430.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Subtotal:" wrappingWidth="65.00000238418579" />
+-      <Text fx:id="priceText" layoutX="490.0" layoutY="430.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="58.0" />
+-   </children>
++    <children>
++        <TableView fx:id="orderTable" layoutX="16.0" layoutY="43.0" prefHeight="332.0" prefWidth="863.0">
++            <columns>
++                <TableColumn fx:id="pizzaSizeColumn" prefWidth="97.0" text="Size" />
++                <TableColumn fx:id="pizzaCrustColumn" prefWidth="111.0" text="Pizza Crust" />
++                <TableColumn fx:id="pizzaToppingsColumn" prefWidth="218.0" text="Pizza Toppings" />
++                <TableColumn fx:id="nameColumn" minWidth="9.0" prefWidth="182.0" text="Name" />
++                <TableColumn fx:id="quantityColumn" prefWidth="151.0" text="Quantity" />
++                <TableColumn fx:id="prizeColumn" prefWidth="103.0" text="Prize" />
++            </columns>
++        </TableView>
++        <Button layoutX="34.0" layoutY="394.0" mnemonicParsing="false" onAction="#handleEditButton" prefHeight="31.0" prefWidth="65.0" style="-fx-background-color: red;" text="Edit" textFill="WHITE">
++            <font>
++                <Font name="Arial Black" size="15.0" />
++            </font>
++        </Button>
++        <Button layoutX="147.0" layoutY="394.0" mnemonicParsing="false" onAction="#handleRemoveButton" style="-fx-background-color: red;" text="Remove" textFill="WHITE">
++            <font>
++                <Font name="Arial Black" size="15.0" />
++            </font></Button>
++        <Button layoutX="721.0" layoutY="410.0" mnemonicParsing="false" onAction="#handleCheckoutButton" style="-fx-background-color: red;" text="Go to checkout" textFill="WHITE">
++            <font>
++                <Font name="Arial Black" size="15.0" />
++            </font></Button>
++        <Text layoutX="414.0" layoutY="430.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Subtotal:" wrappingWidth="65.00000238418579" />
++        <Text fx:id="priceText" layoutX="490.0" layoutY="430.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="58.0" />
++    </children>
+ </AnchorPane>
