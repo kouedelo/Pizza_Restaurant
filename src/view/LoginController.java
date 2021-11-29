@@ -87,9 +87,9 @@ public class LoginController implements Initializable {
         try {
             System.out.println("Current Staff Phone number: " + currentCustomer.getPhoneNumber() + "\n");
             System.out.println("Current Staff Password: " + currentCustomer.getPassword() + "\n");
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/homePage.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/orderPage.fxml"));
             Parent parent = loader.load();
-            HomePageController controller = loader.getController();
+            orderPageController controller = loader.getController();
             controller.currentCustomer = currentCustomer;
             Stage stage = new Stage(StageStyle.DECORATED);
             stage.setTitle("Pizza App");
