@@ -105,6 +105,7 @@ CONSTRAINT PIZZA_TOPPING_FK
 CREATE TABLE BEVERAGE(
 item_id                        varchar(20)           NOT NULL,
 name                           varchar(20)           NOT NULL,
+size                           varchar(20)           NOT NULL,
 quantity                       int                   NOT NULL,
 price                          double                NOT NULL,
 

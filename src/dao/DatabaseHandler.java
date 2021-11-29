@@ -1,8 +1,10 @@
 package dao;
 
-// Import log4j classes for logging purposes.
+
 
 import model.*;
+
+// Import log4j classes for logging purposes.
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -186,7 +188,7 @@ public class DatabaseHandler {
         pizza1.getToppings().add(new PizzaTopping("2244",  "cheese",  2.99));
 
         orderItemList.add(pizza1);
-        orderItemList.add(new Beverage( "667",  9,  3.9,  "coca cola"));
+        orderItemList.add(new Beverage( "667",  9,  3.9,  "coca cola","small"));
         orderItemList.add(new Sides( "667",  9,  3.9,  "bread"));
     }
 }
