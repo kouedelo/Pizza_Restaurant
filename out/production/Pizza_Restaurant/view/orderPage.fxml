@@ -32,6 +32,6 @@
             <AnchorPane fx:id="mainPane" layoutX="141.0" prefHeight="454.0" prefWidth="894.0" />
          </children>
       </Pane>
-      <Button layoutY="-1.0" mnemonicParsing="false" text="BACK" />
+      <Button layoutY="-1.0" mnemonicParsing="false" onAction="#handleBackButton" text="BACK" />
    </children>
 </AnchorPane>

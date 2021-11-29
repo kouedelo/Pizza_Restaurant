@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import org.apache.logging.log4j.Level;
@@ -19,6 +20,13 @@ import java.util.ResourceBundle;
 public class BeveragePageController implements Initializable {
 
     private final static Logger LOGGER = LogManager.getLogger(BeveragePageController.class.getName());
+
+    @FXML
+    private AnchorPane beveragePane;
+
+    public AnchorPane getBeveragePane() {
+        return beveragePane;
+    }
 
     @FXML
     private void handlePepsiButton(ActionEvent event) {

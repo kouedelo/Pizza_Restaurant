@@ -62,7 +62,20 @@ public class LoginController implements Initializable {
 
     @FXML
     private void handleCancelButtonAction(ActionEvent event) {
-        System.exit(0);
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/homePage.fxml"));
+            Parent parent = loader.load();
+            HomePageController controller = loader.getController();
+            //controller.currentCustomer = currentCustomer;
+            Stage stage = new Stage(StageStyle.DECORATED);
+            stage.setTitle("Pizza App");
+            stage.setScene(new Scene(parent));
+            ((Stage) phoneNumberTxtField.getScene().getWindow()).close();
+            stage.show();
+            //LibraryAssistantUtil.setStageIcon(stage);
+        } catch (IOException ex) {
+            LOGGER.log(Level.ERROR, "{}", ex);
+        }
     }
 
     private void closeStage() {
