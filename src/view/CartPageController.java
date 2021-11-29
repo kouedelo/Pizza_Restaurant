@@ -2,11 +2,13 @@ package view;
 
 import dao.DatabaseHandler;
 import javafx.collections.FXCollections;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import model.OrderItem;
 
@@ -37,6 +39,28 @@ public class CartPageController implements Initializable {
 
     @FXML
     private Text priceText;
+
+    @FXML
+    private AnchorPane cartPane;
+
+    public AnchorPane getCartPane() {
+        return cartPane;
+    }
+
+    @FXML
+    private void handleEditButton(ActionEvent event) {
+
+    }
+
+    @FXML
+    private void handleRemoveButton(ActionEvent event) {
+
+    }
+
+    @FXML
+    private void handleCheckoutButton(ActionEvent event) {
+
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
