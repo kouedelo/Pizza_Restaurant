@@ -44,7 +44,7 @@
             <RadioButton fx:id="tomatoes" layoutX="371.0" layoutY="347.0" mnemonicParsing="false" />
             <RadioButton fx:id="pan" layoutX="180.0" layoutY="67.0" mnemonicParsing="false" toggleGroup="$crust" />
             <Label layoutX="-6.0" layoutY="397.0" prefHeight="89.0" prefWidth="901.0" style="-fx-background-color: #d9d9d9;" />
-            <Button layoutX="730.0" layoutY="424.0" mnemonicParsing="false" style="-fx-background-color: RED;" text="ADD TO CART" textFill="WHITE">
+            <Button layoutX="730.0" layoutY="424.0" mnemonicParsing="false" onAction="#handleAddToCartButton" style="-fx-background-color: RED;" text="ADD TO CART" textFill="WHITE">
                <font>
                   <Font name="Arial Black" size="15.0" />
                </font>
