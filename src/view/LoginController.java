@@ -52,7 +52,7 @@ public class LoginController implements Initializable {
         currentCustomer = DatabaseHandler.getInstance().returnUser(phoneNumber, password);
         if (currentCustomer != null) {
             closeStage();
-            loadHomePage(currentCustomer);
+            loadOrderPage(currentCustomer);
             LOGGER.log(Level.INFO, "User successfully logged in {}", phoneNumber);
         } else {
             errorText.setText("Incorrect Phone number or password");
@@ -83,7 +83,7 @@ public class LoginController implements Initializable {
     }
 
     // Method for loading the homepage
-    void loadHomePage(Customer currentCustomer) {
+    void loadOrderPage(Customer currentCustomer) {
         try {
             System.out.println("Current Staff Phone number: " + currentCustomer.getPhoneNumber() + "\n");
             System.out.println("Current Staff Password: " + currentCustomer.getPassword() + "\n");

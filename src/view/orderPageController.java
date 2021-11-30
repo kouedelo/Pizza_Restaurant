@@ -95,7 +95,7 @@ public class orderPageController implements Initializable {
 
 
     @FXML
-    private void handleBackButton(ActionEvent event) {
+    private void handleLogOutButton(ActionEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/homePage.fxml"));
             Parent parent = loader.load();
@@ -110,6 +110,11 @@ public class orderPageController implements Initializable {
         } catch (IOException ex) {
             LOGGER.log(Level.ERROR, "{}", ex);
         }
+    }
+
+    @FXML
+    private void handleSettingsButton(ActionEvent event) {
+
     }
 
     @Override

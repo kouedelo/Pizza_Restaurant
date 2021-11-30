@@ -44,7 +44,7 @@ public class HomePageController implements Initializable {
     }
 
     @FXML
-    private void handleCreatePizzaButton(ActionEvent event) {
+    private void handleCreateAccountButton(ActionEvent event) {
 
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/orderPage.fxml"));
