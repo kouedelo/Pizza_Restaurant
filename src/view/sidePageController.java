@@ -7,6 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
@@ -94,34 +95,19 @@ public class sidePageController implements Initializable {
                     DatabaseHandler.orderItemList.add(new Sides(UUID.randomUUID().toString(), quantity, chocolateCookiePrice, chocolateCookieName));
                 }
             } else if (!breadStickRadioBtn.isSelected() && !breadStickBitesRadioBtn.isSelected() && !chocolateCookieRadioBtn.isSelected()) {
-                try {
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/messagePage.fxml"));
-                    Parent parent = loader.load();
-                    MessagePageController controller = loader.getController();
-                    controller.setMessage("Please select a side before adding order to cart.");
-                    Stage stage = new Stage(StageStyle.DECORATED);
-                    stage.setTitle("Error!");
-                    stage.setScene(new Scene(parent));
-                    stage.show();
-                    return;
-                    //LibraryAssistantUtil.setStageIcon(stage);
-                } catch (IOException ex) {
-                    LOGGER.log(Level.ERROR, "{}", ex);
-                }
+
+                Alert a = new Alert(Alert.AlertType.INFORMATION);
+                a.setHeaderText("Error!");
+                a.setContentText("Please select a side before adding order to cart.");
+                a.showAndWait();
+                return;
             }
-            try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/messagePage.fxml"));
-                Parent parent = loader.load();
-                MessagePageController controller = loader.getController();
-                controller.setMessage("Order has been added to cart successfully.");
-                Stage stage = new Stage(StageStyle.DECORATED);
-                stage.setTitle("Success");
-                stage.setScene(new Scene(parent));
-                stage.show();
-                //LibraryAssistantUtil.setStageIcon(stage);
-            } catch (IOException ex) {
-                LOGGER.log(Level.ERROR, "{}", ex);
-            }
+
+            Alert a = new Alert(Alert.AlertType.INFORMATION);
+            a.setHeaderText("Success!");
+            a.setContentText("Order has been added to cart successfully..");
+            a.showAndWait();
+
             clearEntries();
         } catch (Exception ex) {
 
