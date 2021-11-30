@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -28,7 +29,14 @@ public class orderPageController implements Initializable {
     public static Customer currentCustomer;
 
     @FXML
+    private Label nameLabel;
+
+    @FXML
     private AnchorPane mainPane;
+
+    public void setNameLabel(String name) {
+        this.nameLabel.setText(name);
+    }
 
     @FXML
     private void handlePizzaButton(ActionEvent event) {

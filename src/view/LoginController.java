@@ -91,6 +91,7 @@ public class LoginController implements Initializable {
             Parent parent = loader.load();
             orderPageController controller = loader.getController();
             controller.currentCustomer = currentCustomer;
+            controller.setNameLabel("Welcome " + currentCustomer.getFirstName());
             Stage stage = new Stage(StageStyle.DECORATED);
             stage.setTitle("Pizza App");
             stage.setScene(new Scene(parent));

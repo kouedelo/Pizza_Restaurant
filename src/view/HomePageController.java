@@ -47,10 +47,10 @@ public class HomePageController implements Initializable {
     private void handleCreateAccountButton(ActionEvent event) {
 
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/orderPage.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/createAccountPage.fxml"));
             Parent parent = loader.load();
-            orderPageController controller = loader.getController();
-            controller.currentCustomer = currentCustomer;
+            CreateAccountController controller = loader.getController();
+            //controller.currentCustomer = currentCustomer;
             Stage stage = new Stage(StageStyle.DECORATED);
             stage.setTitle("Pizza App");
             stage.setScene(new Scene(parent));

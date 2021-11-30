@@ -6,6 +6,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class DataHelper {
@@ -28,6 +29,23 @@ public class DataHelper {
             statement.setString(7, customer.getState());
             statement.setString(8, customer.getZipCode());
             return statement.executeUpdate() > 0;
+        } catch (SQLException ex) {
+            LOGGER.log(Level.ERROR, "{}", ex);
+        }
+        return false;
+    }
+
+    public static boolean isPhoneNumberExists(String phoneNumber) {
+        try {
+            String checkStatement = "SELECT COUNT(*) FROM customer WHERE phone_number=?";
+            PreparedStatement stmt = DatabaseHandler.getInstance().getConnection().prepareStatement(checkStatement);
+            stmt.setString(1, phoneNumber);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                int count = rs.getInt(1);
+                System.out.println(count);
+                return (count > 0);
+            }
         } catch (SQLException ex) {
             LOGGER.log(Level.ERROR, "{}", ex);
         }
