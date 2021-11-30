@@ -14,18 +14,41 @@
          <toggleGroup>
             <ToggleGroup fx:id="size" />
          </toggleGroup>
+         <font>
+            <Font name="Arial Black" size="15.0" />
+         </font>
       </RadioButton>
-      <Text layoutX="134.0" layoutY="229.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Size:" />
-      <Button layoutX="443.0" layoutY="333.0" mnemonicParsing="false" onAction="#handleAddToCartButton" style="-fx-background-color: red;" text="Add to cart" textFill="WHITE">
+      <Text layoutX="134.0" layoutY="229.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Size:">
+         <font>
+            <Font name="Arial Black" size="15.0" />
+         </font></Text>
+      <Button layoutX="392.0" layoutY="334.0" mnemonicParsing="false" onAction="#handleAddToCartButton" style="-fx-background-color: red;" text="Add to cart" textFill="WHITE">
          <font>
             <Font name="Arial Black" size="15.0" />
          </font>
       </Button>
-      <RadioButton fx:id="mediumRadioBtn" layoutX="309.0" layoutY="213.0" mnemonicParsing="false" text="Medium" toggleGroup="$size" />
-      <RadioButton fx:id="largeRadioBtn" layoutX="435.0" layoutY="213.0" mnemonicParsing="false" text="Large" toggleGroup="$size" />
-      <Text layoutX="129.0" layoutY="94.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Beverage Name:" />
+      <RadioButton fx:id="mediumRadioBtn" layoutX="309.0" layoutY="213.0" mnemonicParsing="false" text="Medium" toggleGroup="$size">
+         <font>
+            <Font name="Arial Black" size="15.0" />
+         </font></RadioButton>
+      <RadioButton fx:id="largeRadioBtn" layoutX="435.0" layoutY="213.0" mnemonicParsing="false" text="Large" toggleGroup="$size">
+         <font>
+            <Font name="Arial Black" size="15.0" />
+         </font></RadioButton>
+      <Text layoutX="129.0" layoutY="94.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Beverage Name:">
+         <font>
+            <Font name="Arial Black" size="15.0" />
+         </font></Text>
       <Text fx:id="nameText" layoutX="296.0" layoutY="94.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="90.0" />
-      <Text layoutX="129.0" layoutY="145.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Quantity:" />
+      <Text layoutX="129.0" layoutY="145.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Quantity:">
+         <font>
+            <Font name="Arial Black" size="15.0" />
+         </font></Text>
       <TextField fx:id="quantityTxtField" layoutX="282.0" layoutY="124.0" prefHeight="31.0" prefWidth="137.0" />
+      <Button layoutX="131.0" layoutY="334.0" mnemonicParsing="false" onAction="#handleCancelButton" prefHeight="33.0" prefWidth="90.0" style="-fx-background-color: red;" text="Cancel" textFill="WHITE">
+         <font>
+            <Font name="Arial Black" size="15.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

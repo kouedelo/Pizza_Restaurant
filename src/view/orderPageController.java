@@ -1,5 +1,6 @@
 package view;
 
+import dao.DatabaseHandler;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -104,6 +105,7 @@ public class orderPageController implements Initializable {
 
     @FXML
     private void handleLogOutButton(ActionEvent event) {
+        DatabaseHandler.orderItemList.clear();
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/homePage.fxml"));
             Parent parent = loader.load();

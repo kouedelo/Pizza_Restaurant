@@ -22,8 +22,8 @@ public class DataHelper {
                     "INSERT INTO customer(phone_number, password, email, first_name, last_name, city, state, zip_code) VALUES(?,?,?,?,?,?,?,?)");
             statement.setString(1, customer.getPhoneNumber());
             statement.setString(2, customer.getPassword());
-            statement.setString(4, customer.getEmail());
-            statement.setString(3, customer.getFirstName());
+            statement.setString(3, customer.getEmail());
+            statement.setString(4, customer.getFirstName());
             statement.setString(5, customer.getLastName());
             statement.setString(6, customer.getCity());
             statement.setString(7, customer.getState());

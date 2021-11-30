@@ -3,17 +3,29 @@ package view;
 import dao.DatabaseHandler;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import model.Sides;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.UUID;
 
 public class sidePageController implements Initializable {
+
+    private final static Logger LOGGER = LogManager.getLogger(sidePageController.class.getName());
+
     @FXML
     private AnchorPane SidesPane;
 
@@ -82,9 +94,32 @@ public class sidePageController implements Initializable {
                     DatabaseHandler.orderItemList.add(new Sides(UUID.randomUUID().toString(), quantity, chocolateCookiePrice, chocolateCookieName));
                 }
             }
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/messagePage.fxml"));
+                Parent parent = loader.load();
+                MessagePageController controller = loader.getController();
+                controller.setMessage("Order has been added to cart successfully.");
+                Stage stage = new Stage(StageStyle.DECORATED);
+                stage.setTitle("Success");
+                stage.setScene(new Scene(parent));
+                stage.show();
+                //LibraryAssistantUtil.setStageIcon(stage);
+            } catch (IOException ex) {
+                LOGGER.log(Level.ERROR, "{}", ex);
+            }
+            clearEntries();
         } catch (Exception ex) {
 
         }
+    }
+
+    private void clearEntries() {
+        breadStickRadioBtn.setSelected(false);
+        breadStickBitesRadioBtn.setSelected(false);
+        chocolateCookieRadioBtn.setSelected(false);
+        breadStickTxtField.clear();
+        breadStickBitesTxtField.clear();
+        chocolateCookieTxtField.clear();
     }
 
     @Override
