@@ -67,6 +67,23 @@ public class BeverageItemPageController implements Initializable {
                 DatabaseHandler.orderItemList.add(new Beverage(UUID.randomUUID().toString(), quantity, 1.0, nameText.getText(), "Large"));
             }
 
+            if (!smallRadioBtn.isSelected() && !mediumRadioBtn.isSelected() && !largeRadioBtn.isSelected()) {
+                try {
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/messagePage.fxml"));
+                    Parent parent = loader.load();
+                    MessagePageController controller = loader.getController();
+                    controller.setMessage("Please select a size before adding order to cart.");
+                    Stage stage = new Stage(StageStyle.DECORATED);
+                    stage.setTitle("Error!");
+                    stage.setScene(new Scene(parent));
+                    stage.show();
+                    return;
+                    //LibraryAssistantUtil.setStageIcon(stage);
+                } catch (IOException ex) {
+                    LOGGER.log(Level.ERROR, "{}", ex);
+                }
+            }
+
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/messagePage.fxml"));
                 Parent parent = loader.load();
