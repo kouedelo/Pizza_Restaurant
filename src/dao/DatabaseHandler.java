@@ -23,7 +23,7 @@ public class DatabaseHandler {
     private static DatabaseHandler handler = null;
 
     // Mysql Database URL
-    private static final String DB_URL = "jdbc:mysql://localhost:3306/pizza_restaurant?zeroDateTimeBehavior=CONVERT_TO_NULL&serverTimezone=UTC&useSSL=false";
+    private static final String DB_URL = "jdbc:mysql://localhost:3306/pizza_restaurant?allowPublicKeyRetrieval=true&zeroDateTimeBehavior=CONVERT_TO_NULL&serverTimezone=UTC&useSSL=false";
 
     // Database username
     private static final String username = "";
