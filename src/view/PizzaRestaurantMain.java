@@ -8,6 +8,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+// Main class
 public class PizzaRestaurantMain extends Application {
 
     public static void main(String[] args) {

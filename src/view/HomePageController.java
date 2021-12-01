@@ -19,7 +19,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class HomePageController implements Initializable {
-
+    /*Define a static logger variable so that it references
+        the Logger instance named "HomePageController".*/
     private final static Logger LOGGER = LogManager.getLogger(HomePageController.class.getName());
 
     @FXML
@@ -31,6 +32,7 @@ public class HomePageController implements Initializable {
     // Variable for storing current user
     public static Customer currentCustomer = null;
 
+    // Method for displaying login page
     @FXML
     private void handleLoginButton(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("login.fxml"));
@@ -43,6 +45,7 @@ public class HomePageController implements Initializable {
         primaryStage.show();
     }
 
+    // Method for displaying create account page
     @FXML
     private void handleCreateAccountButton(ActionEvent event) {
 
@@ -50,13 +53,11 @@ public class HomePageController implements Initializable {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/createAccountPage.fxml"));
             Parent parent = loader.load();
             CreateAccountController controller = loader.getController();
-            //controller.currentCustomer = currentCustomer;
             Stage stage = new Stage(StageStyle.DECORATED);
             stage.setTitle("Pizza App");
             stage.setScene(new Scene(parent));
             ((Stage) login.getScene().getWindow()).close();
             stage.show();
-            //LibraryAssistantUtil.setStageIcon(stage);
         } catch (IOException ex) {
             LOGGER.log(Level.ERROR, "{}", ex);
         }

@@ -35,6 +35,7 @@ public class DataHelper {
         return false;
     }
 
+    // Method to verify whether there exists a customer with given phone number
     public static boolean isPhoneNumberExists(String phoneNumber) {
         try {
             String checkStatement = "SELECT COUNT(*) FROM customer WHERE phone_number=?";

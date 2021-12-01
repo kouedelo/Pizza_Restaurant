@@ -64,12 +64,15 @@ public class sidePageController implements Initializable {
         return SidesPane;
     }
 
+    // Method for adding order to cart
     @FXML
     private void handleAddToCartButton(ActionEvent event) {
 
         try {
+            // verify if bread stick option is chosen
             if (breadStickRadioBtn.isSelected()) {
                 if (breadStickTxtField.getText().isEmpty()) {
+                    // If quantity is not entered, add a side with one as default quantity
                     DatabaseHandler.orderItemList.add(new Sides(UUID.randomUUID().toString(), 1, breadSticksPrice, breadSticksName));
                 } else {
                     int quantity = Integer.parseInt(breadStickTxtField.getText());
@@ -77,8 +80,10 @@ public class sidePageController implements Initializable {
                 }
             }
 
+            // verify if bread stick bites option is chosen
             if (breadStickBitesRadioBtn.isSelected()) {
                 if (breadStickBitesTxtField.getText().isEmpty()) {
+                    // If quantity is not entered, add a side with one as default quantity
                     DatabaseHandler.orderItemList.add(new Sides(UUID.randomUUID().toString(), 1, breadSticksBitesPrice, breadSticksBitesName));
 
                 } else {
@@ -87,8 +92,10 @@ public class sidePageController implements Initializable {
                 }
             }
 
+            // verify if chocolate cookie option is chosen
             if (chocolateCookieRadioBtn.isSelected()) {
                 if (chocolateCookieTxtField.getText().isEmpty()) {
+                    // If quantity is not entered, add a side with one as default quantity
                     DatabaseHandler.orderItemList.add(new Sides(UUID.randomUUID().toString(), 1, chocolateCookiePrice, chocolateCookieName));
                 } else {
                     int quantity = Integer.parseInt(chocolateCookieTxtField.getText());
@@ -96,6 +103,7 @@ public class sidePageController implements Initializable {
                 }
             } else if (!breadStickRadioBtn.isSelected() && !breadStickBitesRadioBtn.isSelected() && !chocolateCookieRadioBtn.isSelected()) {
 
+                // Display error message if no side is chosen
                 Alert a = new Alert(Alert.AlertType.INFORMATION);
                 a.setHeaderText("Error!");
                 a.setContentText("Please select a side before adding order to cart.");
@@ -103,17 +111,20 @@ public class sidePageController implements Initializable {
                 return;
             }
 
+            // Display success message when order is added to cart successfully
             Alert a = new Alert(Alert.AlertType.INFORMATION);
             a.setHeaderText("Success!");
             a.setContentText("Order has been added to cart successfully..");
             a.showAndWait();
 
+            // Clear all text fields and reset radio buttons
             clearEntries();
         } catch (Exception ex) {
 
         }
     }
 
+    // Method for resetting all text fields and radio buttons
     private void clearEntries() {
         breadStickRadioBtn.setSelected(false);
         breadStickBitesRadioBtn.setSelected(false);

@@ -18,7 +18,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class BeveragePageController implements Initializable {
-
+    /*Define a static logger variable so that it references
+        the Logger instance named "BeveragePageController".*/
     private final static Logger LOGGER = LogManager.getLogger(BeveragePageController.class.getName());
 
     @FXML
@@ -28,8 +29,10 @@ public class BeveragePageController implements Initializable {
         return beveragePane;
     }
 
+    // Method for handling the order pepsi action
     @FXML
     private void handlePepsiButton(ActionEvent event) {
+        // Redirect to the pepsi order page
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/beverageItemPage.fxml"));
             Parent parent = loader.load();
@@ -45,8 +48,10 @@ public class BeveragePageController implements Initializable {
         }
     }
 
+    // Method for handling the order diet pepsi action
     @FXML
     private void handleDietPepsiButton(ActionEvent event) {
+        // Redirect to the diet pepsi order page
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/beverageItemPage.fxml"));
             Parent parent = loader.load();
@@ -62,8 +67,10 @@ public class BeveragePageController implements Initializable {
         }
     }
 
+    // Method for handling the order orange action
     @FXML
     private void handleOrangeButton(ActionEvent event) {
+        // Redirect to the orange order page
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/beverageItemPage.fxml"));
             Parent parent = loader.load();
@@ -79,8 +86,10 @@ public class BeveragePageController implements Initializable {
         }
     }
 
+    // Method for handling the order diet orange action
     @FXML
     private void handleDietOrangeButton(ActionEvent event) {
+        // Redirect to the diet orange order page
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/beverageItemPage.fxml"));
             Parent parent = loader.load();
@@ -96,8 +105,11 @@ public class BeveragePageController implements Initializable {
         }
     }
 
+    // Method for handling the order lemonade action
     @FXML
     private void handleLemonadeButton(ActionEvent event) {
+
+        // Redirect to the lemonade order page
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/beverageItemPage.fxml"));
             Parent parent = loader.load();

@@ -60,8 +60,10 @@ public class LoginController implements Initializable {
 
     }
 
+    // Method for handling cancelling action
     @FXML
     private void handleCancelButtonAction(ActionEvent event) {
+        // Redirect customer to homepage
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/homePage.fxml"));
             Parent parent = loader.load();

@@ -51,24 +51,32 @@ public class BeverageItemPageController implements Initializable {
         this.nameText.setText(name);
     }
 
+    // Method for handling add to cart action
     @FXML
     private void handleAddToCartButton(ActionEvent event) {
         try {
+            // Set default quantity to one
             int quantity = 1;
             if (!quantityTxtField.getText().isEmpty()) {
+                // Get quantity entered by the customer
                 quantity = Integer.parseInt(quantityTxtField.getText());
             }
             if (smallRadioBtn.isSelected()) {
+                // Add a side with small size into the list of orders
                 DatabaseHandler.orderItemList.add(new Beverage(UUID.randomUUID().toString(), quantity, 1.0, nameText.getText(), "Small"));
             }
             if (mediumRadioBtn.isSelected()) {
+                // Add a side with medium size into the list of orders
                 DatabaseHandler.orderItemList.add(new Beverage(UUID.randomUUID().toString(), quantity, 1.0, nameText.getText(), "Medium"));
             }
             if (largeRadioBtn.isSelected()) {
+                // Add a side with large size into the list of orders
                 DatabaseHandler.orderItemList.add(new Beverage(UUID.randomUUID().toString(), quantity, 1.0, nameText.getText(), "Large"));
             }
 
             if (!smallRadioBtn.isSelected() && !mediumRadioBtn.isSelected() && !largeRadioBtn.isSelected()) {
+
+                // Display an error message if no size is selected
                 Alert a = new Alert(Alert.AlertType.INFORMATION);
                 a.setHeaderText("Error!");
                 a.setContentText("Please select a size before adding order to cart.");
@@ -76,11 +84,13 @@ public class BeverageItemPageController implements Initializable {
                 return;
             }
 
+            // Display success message if order is added to cart successfully
             Alert a = new Alert(Alert.AlertType.INFORMATION);
             a.setHeaderText("Success");
             a.setContentText("Order has been added to cart successfully.");
             a.showAndWait();
 
+            // Clear all text fields and reset radio buttons
             clearEntries();
 
         } catch (Exception ex) {
@@ -88,11 +98,13 @@ public class BeverageItemPageController implements Initializable {
         }
     }
 
+    // handle the cancel action
     @FXML
     private void handleCancelButton(ActionEvent event) {
         ((Stage) largeRadioBtn.getScene().getWindow()).close();
     }
 
+    // Method for resetting all text fields and radio buttons
     private void clearEntries() {
         smallRadioBtn.setSelected(false);
         mediumRadioBtn.setSelected(false);

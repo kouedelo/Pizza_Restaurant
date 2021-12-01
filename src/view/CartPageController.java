@@ -62,12 +62,13 @@ public class CartPageController implements Initializable {
         return cartPane;
     }
 
+    // Method for removing item from cart
     @FXML
     private void handleRemoveFromCartButton(ActionEvent event) {
         OrderItem selectedForDeletion = orderTable.getSelectionModel().getSelectedItem();
         if (selectedForDeletion == null) {
 
-
+            // Display error message if no item is chosen
             Alert a = new Alert(Alert.AlertType.INFORMATION);
             a.setHeaderText("Error!");
             a.setContentText("Please select an item first.");
@@ -75,22 +76,30 @@ public class CartPageController implements Initializable {
 
             return;
         }
+
+        // Display confirmation message before deleting the item
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Deleting item");
         alert.setContentText("Are you sure want to delete the item " + " ?");
         Optional<ButtonType> answer = alert.showAndWait();
         if (answer.get() == ButtonType.OK) {
+            // Delete the item from list of orders
             DatabaseHandler.orderItemList.remove(selectedForDeletion);
             Alert a = new Alert(Alert.AlertType.INFORMATION);
             if (!DatabaseHandler.orderItemList.contains(selectedForDeletion)) {
+
+                // Display success message if item is deleted successfully
                 a.setHeaderText("Delete Successfull");
                 a.setContentText("The item has been successfully deleted");
                 a.showAndWait();
                 orderTable.getItems().clear();
                 orderTable.setItems(FXCollections.observableArrayList(DatabaseHandler.orderItemList));
                 orderTable.refresh();
+                // Re-calculate the total prices
                 priceText.setText("$ " + calculateSubtotal());
             } else {
+
+                // Display error message if deletion was not successfully
                 a.setHeaderText("Delete Unsuccessful");
                 a.setContentText("The item could not be deleted");
                 a.showAndWait();
@@ -98,14 +107,18 @@ public class CartPageController implements Initializable {
         }
     }
 
+    // Method for handling the clear cart action
     @FXML
     private void handleClearCartButton(ActionEvent event) {
+        // Remove all orders from the list of orders
         DatabaseHandler.orderItemList.clear();
         orderTable.setItems(FXCollections.observableArrayList(DatabaseHandler.orderItemList));
         orderTable.refresh();
+        // Re-calculate the total prices
         priceText.setText("$ " + calculateSubtotal());
     }
 
+    // Method for handling the go to checkout action
     @FXML
     private void handleCheckoutButton(ActionEvent event) {
 
@@ -118,6 +131,7 @@ public class CartPageController implements Initializable {
         priceText.setText("$ " + calculateSubtotal());
     }
 
+    // Method for mapping each column to an order attributes
     private void initCol() {
         pizzaSizeColumn.setCellValueFactory(new PropertyValueFactory<>("size"));
         pizzaCrustColumn.setCellValueFactory(new PropertyValueFactory<>("crust"));
@@ -127,6 +141,7 @@ public class CartPageController implements Initializable {
         prizeColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
     }
 
+    // Method for calculating the total prices
     private String calculateSubtotal() {
         double totalPrice = 0.0;
         if (DatabaseHandler.orderItemList.size() > 0) {

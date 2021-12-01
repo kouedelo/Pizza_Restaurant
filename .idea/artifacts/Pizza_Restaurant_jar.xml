@@ -1,0 +1,27 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="Pizza_Restaurant:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/Pizza_Restaurant_jar</output-path>
+    <root id="archive" name="Pizza_Restaurant.jar">
+      <element id="module-output" name="Pizza_Restaurant" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/boxable-1.5-RC.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/commons-codec-1.11.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/commons-csv-1.4.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/commons-logging-1.2.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/derby.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/derbyclient.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/fontawesomefx-commons-8.15.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/fontawesomefx-fontawesome-4.7.0-5.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/fontbox-2.0.4.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/gson-2.8.1.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/guava-21.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/javax.mail-1.6.1.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/jfoenix-8.0.4.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/log4j-api-2.11.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/log4j-core-2.11.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/mysql-connector-java-8.0.11.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/pdfbox-2.0.3.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/slf4j-api-1.7.25.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/slf4j-simple-1.7.25.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

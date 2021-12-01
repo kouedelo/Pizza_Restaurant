@@ -24,12 +24,12 @@ public class CheckoutPageController {
     @FXML
     private ChoiceBox<String> orderTypeChoiceBox = new ChoiceBox<>();
     ObservableList<String> availableOrderTypeChoices = FXCollections.observableArrayList("Delivery", "Pick-up");
-    orderTypeChoiceBox.setItems(availableOrderTypeChoices);
+    //orderTypeChoiceBox.setItems(availableOrderTypeChoices);
 
     @FXML
     private ChoiceBox<String> paymentTypeChoiceBox = new ChoiceBox<>();
     ObservableList<String> availablePaymentTypeChoices = FXCollections.observableArrayList("Cash", "Credit or Debit Card", "Check");
-    paymentTypeChoiceBox.setItems(availablePaymentTypeChoices);
+    //paymentTypeChoiceBox.setItems(availablePaymentTypeChoices);
 
     @FXML
     private TextField securityTxtField;

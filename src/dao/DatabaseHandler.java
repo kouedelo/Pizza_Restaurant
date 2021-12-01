@@ -24,7 +24,10 @@ public class DatabaseHandler {
 
     // Mysql Database URL
     private static final String DB_URL = "jdbc:mysql://localhost:3306/pizza_restaurant?zeroDateTimeBehavior=CONVERT_TO_NULL&serverTimezone=UTC&useSSL=false";
+
+    // Database username
     private static final String username = "";
+    // Database password
     private static final String password = "";
     private static Connection conn = null;
     private static Statement stmt = null;
@@ -43,8 +46,6 @@ public class DatabaseHandler {
     automatically connecting to the database*/
     static {
         createConnection();
-        //populateOrders();
-        //inflateDB();
     }
 
     // Method for connecting to the database
@@ -180,15 +181,5 @@ public class DatabaseHandler {
             LOGGER.log(Level.ERROR, "{}", ex);
         }
         return false;
-    }
-
-    private static void populateOrders(){
-        Pizza pizza1 = new Pizza("2244", 2,  18.7,  "medium",  "handmade");
-        pizza1.getToppings().add(new PizzaTopping("2244",  "tomatoes",  2.99));
-        pizza1.getToppings().add(new PizzaTopping("2244",  "cheese",  2.99));
-
-        orderItemList.add(pizza1);
-        orderItemList.add(new Beverage( "667",  9,  3.9,  "coca cola","small"));
-        orderItemList.add(new Sides( "667",  9,  3.9,  "bread"));
     }
 }

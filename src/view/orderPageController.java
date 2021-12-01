@@ -24,11 +24,14 @@ import java.util.ResourceBundle;
 
 public class orderPageController implements Initializable {
 
+    /*Define a static logger variable so that it references
+    the Logger instance named "orderPageController".*/
     private final static Logger LOGGER = LogManager.getLogger(orderPageController.class.getName());
 
     // Variable for storing current user
     public static Customer currentCustomer;
 
+    // Label used to display the user's first name
     @FXML
     private Label nameLabel;
 
@@ -39,6 +42,7 @@ public class orderPageController implements Initializable {
         this.nameLabel.setText(name);
     }
 
+    // Method for displaying the pizza order page
     @FXML
     private void handlePizzaButton(ActionEvent event) {
         try {
@@ -54,6 +58,7 @@ public class orderPageController implements Initializable {
         }
     }
 
+    // Method for displaying the beverage order page
     @FXML
     private void handleBeverageButton(ActionEvent event) {
 
@@ -70,6 +75,7 @@ public class orderPageController implements Initializable {
         }
     }
 
+    // Method for displaying the sides order page
     @FXML
     private void handleSidesButton(ActionEvent event) {
 
@@ -86,6 +92,7 @@ public class orderPageController implements Initializable {
         }
     }
 
+    // Method for displaying the cart page
     @FXML
     private void handleCartButton(ActionEvent event) {
 
@@ -102,10 +109,12 @@ public class orderPageController implements Initializable {
         }
     }
 
-
+    // Method for logging the customer out
     @FXML
     private void handleLogOutButton(ActionEvent event) {
+        // Delete all customer orders
         DatabaseHandler.orderItemList.clear();
+        // Redirect customer to homepage
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/homePage.fxml"));
             Parent parent = loader.load();
@@ -122,6 +131,7 @@ public class orderPageController implements Initializable {
         }
     }
 
+    // Method for displaying settings page
     @FXML
     private void handleSettingsButton(ActionEvent event) {
 

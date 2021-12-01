@@ -21,7 +21,8 @@ import java.util.ArrayList;
 
 
 public class CreateAccountController {
-
+    /*Define a static logger variable so that it references
+        the Logger instance named "CreateAccountController".*/
     private final static Logger LOGGER = LogManager.getLogger(CreateAccountController.class.getName());
 
     @FXML
@@ -64,13 +65,14 @@ public class CreateAccountController {
         this.errorText.setText(errorText);
     }
 
+    // Method for handling cancelling action
     @FXML
     private void handleCancelButton(ActionEvent event) {
+        // Redirect user to homepage
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/homePage.fxml"));
             Parent parent = loader.load();
             HomePageController controller = loader.getController();
-            //controller.currentCustomer = currentCustomer;
             Stage stage = new Stage(StageStyle.DECORATED);
             stage.setTitle("Pizza App");
             stage.setScene(new Scene(parent));
@@ -82,8 +84,11 @@ public class CreateAccountController {
         }
     }
 
+    // Handle create account button
     @FXML
     private void handleCreateAccountButton(ActionEvent event) {
+
+        // Get all entries from form
         String firstName = firstNamextField.getText();
         String city = cityTxtField.getText();
         String password = passwordTxtField.getText();
@@ -94,41 +99,36 @@ public class CreateAccountController {
         String zipCode = zipCodeTxtField.getText();
         String state = stateTxtField.getText();
 
+        // Display error message if not all fields are filled
         if (firstName.isEmpty() || city.isEmpty() || password.isEmpty() || phoneNumber.isEmpty() || email.isEmpty() || lastName.isEmpty()
                 || confirmPassword.isEmpty() || zipCode.isEmpty()
                 || state.isEmpty()) {
 
-           /* try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/messagePage.fxml"));
-                Parent parent = loader.load();
-                MessagePageController controller = loader.getController();
-                controller.setMessage("Please fill all fields.");
-                Stage stage = new Stage(StageStyle.DECORATED);
-                stage.setTitle("Error!");
-                stage.setScene(new Scene(parent));
-                stage.show();
-                //LibraryAssistantUtil.setStageIcon(stage);
-            } catch (IOException ex) {
-                LOGGER.log(Level.ERROR, "{}", ex);
-            }*/
+
 
             this.errorText.setText("Please fill all fields.");
             return;
         }
 
+
+        // Verify whether phone number entered is already found in the database
         if (DataHelper.isPhoneNumberExists(phoneNumber)) {
             this.errorText.setText("Phone number already exits.");
             return;
         }
 
+        // Display error message if entered passwords don't match
         if (!password.equals(confirmPassword)) {
             this.errorText.setText("Passwords doesn't match.");
             return;
         }
 
         Customer newCustomer = new Customer(phoneNumber, password, email, firstName, lastName, city, state, zipCode);
+
+        // Insert new customer into database
         boolean result = DataHelper.insertNewCustomer(newCustomer);
         if (result) {
+            // Redirect to the order page if account is created successfully
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/orderPage.fxml"));
                 Parent parent = loader.load();
@@ -145,6 +145,7 @@ public class CreateAccountController {
                 LOGGER.log(Level.ERROR, "{}", ex);
             }
         } else {
+            // Display error if account could not be created
             this.errorText.setText("An error occurred while creating account.");
         }
     }
