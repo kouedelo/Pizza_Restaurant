@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.SettingsPageController">
+    <children>
+        <Label alignment="CENTER" prefHeight="48.0" prefWidth="600.0" style="-fx-background-color: RED;" text="Account Settings" textFill="WHITE">
+            <font>
+                <Font name="Bernard MT Condensed" size="48.0" />
+            </font>
+        </Label>
+        <Button layoutX="25.0" layoutY="353.0" mnemonicParsing="false" onAction="#handleCancelButtonAction" style="-fx-background-color: red;" text="Back to Home" textFill="WHITE">
+            <font>
+                <Font name="Arial Black" size="15.0" />
+            </font>
+        </Button>
+        <Button layoutX="178.0" layoutY="353.0" mnemonicParsing="false" onAction="#handleCancelButtonAction" style="-fx-background-color: red;" text="Save Settings" textFill="WHITE">
+            <font>
+                <Font name="Arial Black" size="15.0" />
+            </font>
+        </Button>
+        <Text layoutX="14.0" layoutY="92.0" strokeType="OUTSIDE" strokeWidth="0.0" text="First Name">
+            <font>
+                <Font name="Arial Rounded MT Bold" size="15.0" />
+            </font>
+        </Text>
+        <TextField fx:id="firstNameTxtField" layoutX="99.0" layoutY="74.0" prefHeight="26.0" prefWidth="179.0" promptText="John" />
+        <Text layoutX="297.0" layoutY="92.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Last Name">
+            <font>
+                <Font name="Arial Rounded MT Bold" size="15.0" />
+            </font>
+        </Text>
+        <TextField fx:id="lastNameTxtField" layoutX="388.0" layoutY="73.0" prefHeight="26.0" prefWidth="196.0" promptText="Smith" />
+        <Text layoutX="12.0" layoutY="126.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Address">
+            <font>
+                <Font name="Arial Rounded MT Bold" size="15.0" />
+            </font>
+        </Text>
+        <TextField fx:id="addressTxtField" layoutX="99.0" layoutY="107.0" prefHeight="26.0" prefWidth="483.0" />
+        <Text layoutX="298.0" layoutY="161.0" strokeType="OUTSIDE" strokeWidth="0.0" text="State">
+            <font>
+                <Font name="Arial Rounded MT Bold" size="15.0" />
+            </font>
+        </Text>
+        <Text layoutX="12.0" layoutY="160.0" strokeType="OUTSIDE" strokeWidth="0.0" text="City">
+            <font>
+                <Font name="Arial Rounded MT Bold" size="15.0" />
+            </font>
+        </Text>
+        <TextField fx:id="cityTxtField" layoutX="99.0" layoutY="142.0" prefHeight="26.0" prefWidth="179.0" />
+        <Text layoutX="461.0" layoutY="160.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ZIP">
+            <font>
+                <Font name="Arial Rounded MT Bold" size="15.0" />
+            </font>
+        </Text>
+        <TextField fx:id="zipTxtField" layoutX="504.0" layoutY="142.0" prefHeight="26.0" prefWidth="79.0" />
+        <Text layoutX="10.0" layoutY="226.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Credit/Debit Card #">
+            <font>
+                <Font name="Arial Rounded MT Bold" size="15.0" />
+            </font>
+        </Text>
+        <Text layoutX="10.0" layoutY="268.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Expiration Date">
+            <font>
+                <Font name="Arial Rounded MT Bold" size="15.0" />
+            </font>
+        </Text>
+        <TextField fx:id="cardNumTxtField" layoutX="162.0" layoutY="207.0" prefHeight="26.0" prefWidth="196.0" promptText="1234 5678 1234 5678" />
+        <TextField fx:id="expirationTextField" layoutX="162.0" layoutY="250.0" prefHeight="26.0" prefWidth="196.0" promptText="MM/YYYY" />
+        <Text layoutX="9.0" layoutY="314.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Re-enter password:">
+            <font>
+                <Font name="Arial Rounded MT Bold" size="15.0" />
+            </font>
+        </Text>
+        <TextField fx:id="passwordReentryTxtField" layoutX="162.0" layoutY="295.0" prefHeight="26.0" prefWidth="196.0" />
+        <Button layoutX="397.0" layoutY="353.0" mnemonicParsing="false" onAction="#handleCancelButtonAction" style="-fx-background-color: red;" text="View Order History" textFill="WHITE">
+            <font>
+                <Font name="Arial Black" size="15.0" />
+            </font>
+        </Button>
+      <TextField fx:id="stateTxtField" layoutX="348.0" layoutY="142.0" prefHeight="26.0" prefWidth="101.0" />
+    </children>
+</AnchorPane>

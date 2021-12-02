@@ -22,14 +22,13 @@ public class CheckoutPageController {
     private TextField expirationTextField;
 
     @FXML
-    private ChoiceBox<String> orderTypeChoiceBox = new ChoiceBox<>();
-    ObservableList<String> availableOrderTypeChoices = FXCollections.observableArrayList("Delivery", "Pick-up");
-    //orderTypeChoiceBox.setItems(availableOrderTypeChoices);
+    String[] orderTypeOptions = {"Delivery", "Pick-up"};
+    private ChoiceBox orderTypeChoiceBox = new ChoiceBox(FXCollections.observableArrayList(orderTypeOptions));
 
     @FXML
+    String[] paymentTypeOptions = {"Cash", "Credit or Debit Card", "Check"};
     private ChoiceBox<String> paymentTypeChoiceBox = new ChoiceBox<>();
     ObservableList<String> availablePaymentTypeChoices = FXCollections.observableArrayList("Cash", "Credit or Debit Card", "Check");
-    //paymentTypeChoiceBox.setItems(availablePaymentTypeChoices);
 
     @FXML
     private TextField securityTxtField;
